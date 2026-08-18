@@ -246,10 +246,40 @@ p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:au
   position:absolute;top:22px;right:26px;background:none;border:none;
   font-size:2.2rem;cursor:pointer;color:var(--muted);font-family:'Baloo 2',sans-serif;
 }
-.modal .cd-head{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:28px;padding-right:36px;}
+.modal .cd-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:28px;padding-right:36px;}
+.modal .cd-head-info{display:flex;align-items:center;gap:20px;flex-wrap:wrap;flex:1;min-width:260px;}
 .modal .cd-head h4{font-family:'Baloo 2',sans-serif;color:var(--text);font-size:2.2rem;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;}
 .modal .cd-head .cd-date{font-family:'Baloo 2',sans-serif;color:var(--muted);font-weight:600;font-size:1.3rem;}
-.modal .cd-head .cd-pills{display:flex;gap:10px;flex-wrap:wrap;margin-left:auto;}
+.modal .cd-head .cd-pills{display:flex;gap:10px;flex-wrap:wrap;}
+
+/* Built-in classroom timer */
+.cd-timer{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  background:var(--accent-dim);border:3px solid var(--accent);border-radius:16px;
+  padding:12px 22px;flex-shrink:0;
+}
+.cd-timer.timer-done{border-color:var(--red);background:var(--red-dim);animation:timerFlash 1s steps(1) infinite;}
+@keyframes timerFlash{50%{opacity:0.5;}}
+.cd-timer .timer-display{
+  font-family:'Baloo 2',sans-serif;font-weight:800;font-size:3.4rem;line-height:1;
+  color:var(--ink);letter-spacing:1px;font-variant-numeric:tabular-nums;
+}
+.cd-timer.timer-done .timer-display{color:var(--red);}
+.cd-timer .timer-controls{display:flex;align-items:center;gap:8px;}
+.cd-timer .timer-controls button{
+  border:none;background:var(--card);color:var(--ink);width:38px;height:38px;
+  border-radius:10px;font-size:1.15rem;cursor:pointer;box-shadow:var(--shadow);
+  display:flex;align-items:center;justify-content:center;
+}
+.cd-timer .timer-controls button:hover{background:var(--accent);color:#fff;}
+.cd-timer .timer-presets{display:flex;gap:5px;}
+.cd-timer .timer-presets button{
+  border:none;background:var(--card);color:var(--ink);padding:0 10px;height:32px;
+  border-radius:8px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:0.85rem;
+  cursor:pointer;box-shadow:var(--shadow);
+}
+.cd-timer .timer-presets button:hover{background:var(--accent);color:#fff;}
+.cd-timer .timer-presets button.active{background:var(--ink);color:#fff;}
 .pill{font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:700;padding:6px 16px;border-radius:8px;color:#fff;white-space:nowrap;}
 .pill.level{background:var(--gold);}
 .pill.goal{background:var(--accent);}
@@ -701,15 +731,115 @@ function openModal(r){
   modalEl.innerHTML = `
     <button class="close" onclick="closeModal()">✕</button>
     <div class="cd-head">
-      <h4>Rotation ${rot.r}</h4>
-      <span class="cd-date">${rotDateLabel(rot)}</span>
-      <span class="cd-pills">${rotationPillsHTML(rot)}</span>
+      <div class="cd-head-info">
+        <h4>Rotation ${rot.r}</h4>
+        <span class="cd-date">${rotDateLabel(rot)}</span>
+        <span class="cd-pills">${rotationPillsHTML(rot)}</span>
+      </div>
+      <div class="cd-timer" id="cd-timer">
+        <div class="timer-display" id="timer-display">05:00</div>
+        <div class="timer-controls">
+          <button id="timer-toggle" title="Start/pause">▶</button>
+          <button id="timer-reset" title="Reset">↺</button>
+          <div class="timer-presets">
+            <button data-mins="1">1m</button>
+            <button data-mins="5" class="active">5m</button>
+            <button data-mins="10">10m</button>
+            <button data-mins="15">15m</button>
+          </div>
+        </div>
+      </div>
     </div>
     ${rotationBodyHTML(rot)}
   `;
   overlayEl.classList.add('show');
+  initTimer();
 }
-function closeModal(){ overlayEl.classList.remove('show'); }
+function closeModal(){ overlayEl.classList.remove('show'); stopTimer(); }
+
+// --- Built-in classroom timer, shown next to the rotation number when a modal is open ---
+let timerInterval = null;
+let timerDuration = 300;
+let timerRemaining = 300;
+let timerRunning = false;
+function fmtTimer(sec){
+  const m = Math.floor(sec / 60), s = sec % 60;
+  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+function renderTimerDisplay(){
+  const display = document.getElementById('timer-display');
+  if(display) display.textContent = fmtTimer(Math.max(timerRemaining, 0));
+  const toggle = document.getElementById('timer-toggle');
+  if(toggle) toggle.textContent = timerRunning ? '⏸' : '▶';
+}
+function playTimerBeep(){
+  try{
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    [0, 0.35, 0.7].forEach(delay => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.frequency.value = 880;
+      g.gain.setValueAtTime(0.25, ctx.currentTime + delay);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + 0.3);
+      o.start(ctx.currentTime + delay);
+      o.stop(ctx.currentTime + delay + 0.3);
+    });
+  } catch(e){}
+}
+function startTimer(){
+  if(timerRunning || timerRemaining <= 0) return;
+  timerRunning = true;
+  const timerEl = document.getElementById('cd-timer');
+  if(timerEl) timerEl.classList.remove('timer-done');
+  timerInterval = setInterval(() => {
+    timerRemaining--;
+    if(timerRemaining <= 0){
+      timerRemaining = 0;
+      stopTimer();
+      const el = document.getElementById('cd-timer');
+      if(el) el.classList.add('timer-done');
+      playTimerBeep();
+    }
+    renderTimerDisplay();
+  }, 1000);
+  renderTimerDisplay();
+}
+function stopTimer(){
+  timerRunning = false;
+  if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
+  renderTimerDisplay();
+}
+function resetTimer(){
+  stopTimer();
+  timerRemaining = timerDuration;
+  const el = document.getElementById('cd-timer');
+  if(el) el.classList.remove('timer-done');
+  renderTimerDisplay();
+}
+function setTimerPreset(mins, btn){
+  stopTimer();
+  timerDuration = mins * 60;
+  timerRemaining = timerDuration;
+  const el = document.getElementById('cd-timer');
+  if(el) el.classList.remove('timer-done');
+  document.querySelectorAll('.timer-presets button').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderTimerDisplay();
+}
+function initTimer(){
+  timerDuration = 300;
+  timerRemaining = 300;
+  timerRunning = false;
+  if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
+  renderTimerDisplay();
+  const toggleBtn = document.getElementById('timer-toggle');
+  if(toggleBtn) toggleBtn.addEventListener('click', () => timerRunning ? stopTimer() : startTimer());
+  const resetBtn = document.getElementById('timer-reset');
+  if(resetBtn) resetBtn.addEventListener('click', resetTimer);
+  document.querySelectorAll('.timer-presets button').forEach(btn => {
+    btn.addEventListener('click', () => setTimerPreset(parseInt(btn.dataset.mins, 10), btn));
+  });
+}
 function openSpecialModal(special){
   modalEl.className = 'modal';
   modalEl.innerHTML = `
