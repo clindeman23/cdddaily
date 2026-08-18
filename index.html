@@ -280,6 +280,20 @@ p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:au
 }
 .cd-timer .timer-presets button:hover{background:var(--accent);color:#fff;}
 .cd-timer .timer-presets button.active{background:var(--ink);color:#fff;}
+.cd-timer .timer-custom{display:flex;gap:6px;}
+.cd-timer .timer-custom input{
+  width:88px;text-align:center;border:none;border-radius:8px;
+  font-family:'Baloo 2',sans-serif;font-weight:700;font-size:0.85rem;color:var(--ink);
+  padding:0 8px;height:32px;box-shadow:var(--shadow);
+}
+.cd-timer .timer-custom input.input-error{outline:2px solid var(--red);}
+.cd-timer .timer-custom input::placeholder{color:var(--muted);font-weight:600;}
+.cd-timer .timer-custom button{
+  border:none;background:var(--ink);color:#fff;padding:0 14px;height:32px;
+  border-radius:8px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:0.85rem;
+  cursor:pointer;
+}
+.cd-timer .timer-custom button:hover{background:var(--accent);}
 .pill{font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:700;padding:6px 16px;border-radius:8px;color:#fff;white-space:nowrap;}
 .pill.level{background:var(--gold);}
 .pill.goal{background:var(--accent);}
@@ -748,6 +762,10 @@ function openModal(r){
             <button data-mins="15">15m</button>
           </div>
         </div>
+        <div class="timer-custom">
+          <input type="text" id="timer-custom-input" placeholder="mm:ss or min" inputmode="numeric">
+          <button id="timer-custom-set">Set</button>
+        </div>
       </div>
     </div>
     ${rotationBodyHTML(rot)}
@@ -826,6 +844,39 @@ function setTimerPreset(mins, btn){
   if(btn) btn.classList.add('active');
   renderTimerDisplay();
 }
+// Accepts "7", "7.5" (minutes) or "7:30" (mm:ss) and returns whole seconds, or null if invalid.
+function parseCustomTimeToSeconds(str){
+  str = (str || '').trim();
+  if(!str) return null;
+  if(str.includes(':')){
+    const parts = str.split(':');
+    if(parts.length !== 2) return null;
+    const m = Number(parts[0]), s = Number(parts[1]);
+    if(!Number.isFinite(m) || !Number.isFinite(s) || m < 0 || s < 0 || s >= 60) return null;
+    const total = Math.round(m * 60 + s);
+    return total > 0 ? total : null;
+  }
+  const mins = Number(str);
+  if(!Number.isFinite(mins) || mins <= 0) return null;
+  return Math.round(mins * 60);
+}
+function setCustomTimer(){
+  const input = document.getElementById('timer-custom-input');
+  if(!input) return;
+  const secs = parseCustomTimeToSeconds(input.value);
+  if(secs === null){
+    input.classList.add('input-error');
+    return;
+  }
+  input.classList.remove('input-error');
+  stopTimer();
+  timerDuration = secs;
+  timerRemaining = secs;
+  const el = document.getElementById('cd-timer');
+  if(el) el.classList.remove('timer-done');
+  document.querySelectorAll('.timer-presets button').forEach(b => b.classList.remove('active'));
+  renderTimerDisplay();
+}
 function initTimer(){
   timerDuration = 300;
   timerRemaining = 300;
@@ -839,6 +890,13 @@ function initTimer(){
   document.querySelectorAll('.timer-presets button').forEach(btn => {
     btn.addEventListener('click', () => setTimerPreset(parseInt(btn.dataset.mins, 10), btn));
   });
+  const customSetBtn = document.getElementById('timer-custom-set');
+  if(customSetBtn) customSetBtn.addEventListener('click', setCustomTimer);
+  const customInput = document.getElementById('timer-custom-input');
+  if(customInput){
+    customInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') setCustomTimer(); });
+    customInput.addEventListener('input', () => customInput.classList.remove('input-error'));
+  }
 }
 function openSpecialModal(special){
   modalEl.className = 'modal';
