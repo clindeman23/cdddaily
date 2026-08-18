@@ -712,7 +712,7 @@ function rotationBodyHTML(rot){
       </div>`;
     body += `<div><strong>${rot.coding.level}</strong> · due ${rot.coding.due}</div>`;
     body += `<div style="margin-top:4px;">${rot.coding.focus}</div>`;
-    body += `<div class="milestone-note">⚡ Fast finisher: ${rot.coding.ff} &nbsp;·&nbsp; Milestone: ${rot.coding.milestone}</div>`;
+    body += `<div class="milestone-note">Milestone: ${rot.coding.milestone}</div>`;
     body += `</div>`;
   } else {
     body += `<div class="msection coding"><div class="mlabel">💻 Coding — CodeCombat</div><div>${rot.codingNote || 'Not started yet — coding blocks begin Rotation 3.'}</div></div>`;
