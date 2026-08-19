@@ -350,6 +350,36 @@ table.ref-table tr:nth-child(even) td{background:var(--paper);}
 ul.notes-list{padding-left:22px;margin-top:10px;}
 ul.notes-list li{margin-bottom:8px;font-size:0.92rem;}
 
+/* Typing Check-In Key (teacher mode) */
+.tcheckin-intro p{margin-bottom:10px;font-size:0.92rem;}
+.tcheckin-h{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:0.95rem;margin:18px 0 8px;color:var(--ink);}
+.tcheckin-steps{padding-left:22px;margin:8px 0;}
+.tcheckin-steps li{margin-bottom:6px;font-size:0.92rem;}
+.tcheckin-rule{
+  background:var(--accent-dim);border-left:4px solid var(--accent);color:var(--text);
+  padding:12px 16px;border-radius:6px;margin:12px 0;font-size:0.9rem;
+}
+.tcheckin-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 10px;}
+.tcheckin-btn{
+  border:1px solid var(--border);background:var(--card);color:var(--text);
+  padding:8px 18px;border-radius:999px;font-family:'Baloo 2',sans-serif;font-weight:700;
+  font-size:0.85rem;cursor:pointer;transition:all 0.15s;
+}
+.tcheckin-btn:hover{border-color:var(--accent);}
+.tcheckin-btn.active{background:var(--ink);border-color:var(--ink);color:#fff;}
+.tcheckin-panel{border:2px solid var(--border);border-radius:10px;padding:18px 22px;background:var(--card);}
+.tcheckin-detail{display:none;}
+.tcheckin-detail.active{display:block;}
+.tcheckin-title{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:1.05rem;color:var(--text);margin-bottom:6px;}
+.tcheckin-settings{font-size:0.85rem;color:var(--muted);font-weight:600;margin-bottom:6px;}
+.tcheckin-credit{font-weight:700;margin-top:10px;font-size:0.92rem;}
+.tcheckin-passage-note{font-size:0.78rem;color:var(--muted);font-weight:700;margin-top:14px;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;}
+.tcheckin-passage{
+  background:var(--paper);border:1px solid var(--border);border-radius:8px;
+  padding:14px 16px;font-size:0.88rem;line-height:1.6;color:var(--text);
+}
+.tcheckin-footnote{font-size:0.82rem;color:var(--muted);font-style:italic;margin-top:10px;}
+
 footer{
   text-align:center;color:var(--muted);font-size:0.8rem;margin-top:40px;padding:0 20px;
   font-family:'Baloo 2',sans-serif;
@@ -616,6 +646,258 @@ footer{
         <li><strong>Co-teacher:</strong> touch base before each rotation. Filler time in Rotation 1 can vary a lot by period — have a backup plan ready.</li>
         <li><strong>CS1→GD1 handoff:</strong> the Arena (R10–12) is intentionally hard with two catch-up rotations before the graded attempt in R12. GD1 levels (R13+) run slower on purpose — let students play with their creations.</li>
       </ul>
+    </details>
+
+    <details class="ref">
+      <summary>⌨️ Typing Check-In Key</summary>
+      <div class="tcheckin-intro">
+        <p>Everything needed to run a typing check-in: the TypingClub settings, the run steps, what earns credit, and the exact passage to paste.</p>
+
+        <div class="tcheckin-h">What a check-in looks like</div>
+        <p>Every check-in runs the same way. Once students know it, the whole thing costs about three minutes of class.</p>
+        <ol class="tcheckin-steps">
+          <li>Everyone opens the test and takes their hands off the keyboard. Wait for every screen.</li>
+          <li>Count them in — "three, two, one, go." Everyone starts on the same beat.</li>
+          <li>Run the clock. No talking.</li>
+          <li>Everyone writes down their two numbers: WPM and accuracy.</li>
+        </ol>
+        <div class="tcheckin-rule">One standing rule: nobody announces their number out loud. Not at a check-in, not afterwards, not ever. Students are measured against their own previous best, and that only holds if the room isn't quietly ranking itself. Rotation 4 is where you teach this and the countdown; after that it should run itself.</div>
+
+        <div class="tcheckin-h">Settings at a glance</div>
+        <div class="tw-table">
+        <table class="ref-table">
+          <tr><th>Rot</th><th>Check-in</th><th>Test length</th><th>Target WPM</th><th>Target accuracy</th></tr>
+          <tr><td>R1</td><td>Baseline</td><td>3 minutes</td><td>leave blank</td><td>leave blank</td></tr>
+          <tr><td>R4</td><td>The Routine</td><td>1 minute</td><td>leave blank</td><td>leave blank</td></tr>
+          <tr><td>R6</td><td>Accuracy Gauntlet</td><td>3 minutes</td><td>leave blank</td><td>95%</td></tr>
+          <tr><td>R8</td><td>Blind Draw</td><td>1 minute</td><td>18</td><td>86%</td></tr>
+          <tr><td>R10</td><td>GRADED — Midquarter</td><td>3 minutes</td><td>20</td><td>88%</td></tr>
+          <tr><td>R12</td><td>Heatmap Autopsy</td><td>no test</td><td>—</td><td>—</td></tr>
+          <tr><td>R14</td><td>Beat Your PR</td><td>1 minute</td><td>22</td><td>88%</td></tr>
+          <tr><td>R16</td><td>Speed vs. Accuracy</td><td>1 minute, run twice</td><td>23</td><td>90%</td></tr>
+          <tr><td>R18</td><td>GRADED — Q1 Final</td><td>5 minutes</td><td>25</td><td>90%</td></tr>
+          <tr><td>R20</td><td>Data Story</td><td>no test</td><td>—</td><td>—</td></tr>
+        </table>
+        </div>
+
+        <p><strong>Why R1, R4 and R6 leave the target blank.</strong> TypingClub draws a goal line on the student's screen when you set a target. At the baseline and at R4 that anchors students to a number before they have any business having one, and at R6 it undercuts the whole point of the Accuracy Gauntlet, which is that speed doesn't matter that day.</p>
+
+        <div class="tcheckin-h">Setup — same every time</div>
+        <p>TypingClub teacher dashboard → Typing Tests tab → create a new test → set the duration → paste the passage → assign to your class. Make a fresh test each time; never re-assign an old one. Results give you adjusted WPM (speed minus errors) and accuracy per student.</p>
+
+        <div class="tcheckin-h">Four rules</div>
+        <ul class="notes-list">
+          <li>Use the passage listed for that rotation — never reuse one, or students memorize it.</li>
+          <li>Lowercase only, all quarter. No capitals, numbers, or symbols; students haven't been taught them yet.</li>
+          <li>Nobody finishes the passage. They're intentionally too long. Reaching a quarter of the way through is normal.</li>
+          <li>Check-ins run on even rotations only — R4, 6, 8, 10, 12, 14, 16, 18, 20. Odd rotations are normal typing practice.</li>
+        </ul>
+      </div>
+
+      <div class="tcheckin-buttons" id="tcheckin-buttons">
+        <button class="tcheckin-btn active" data-r="1">R1</button>
+        <button class="tcheckin-btn" data-r="4">R4</button>
+        <button class="tcheckin-btn" data-r="6">R6</button>
+        <button class="tcheckin-btn" data-r="8">R8</button>
+        <button class="tcheckin-btn" data-r="10">R10</button>
+        <button class="tcheckin-btn" data-r="12">R12</button>
+        <button class="tcheckin-btn" data-r="14">R14</button>
+        <button class="tcheckin-btn" data-r="16">R16</button>
+        <button class="tcheckin-btn" data-r="18">R18</button>
+        <button class="tcheckin-btn" data-r="20">R20</button>
+      </div>
+
+      <div class="tcheckin-panel">
+
+        <div class="tcheckin-detail active" data-tcheckin="1">
+          <div class="tcheckin-title">R1 · Baseline Bank · 3 min · 0 pts, ungraded</div>
+          <div class="tcheckin-settings">Settings: 3 minutes · Target WPM: leave blank · Target accuracy: leave blank</div>
+          <div class="tcheckin-h">How it runs</div>
+          <ul class="notes-list">
+            <li>Say it plainly before you start: this is not a grade and not a race. It sets their own starting number for the year.</li>
+            <li>Walk the room while they type and fix posture and finger placement. Form starts on day one, not at the first graded test.</li>
+            <li>Every student records their WPM and accuracy somewhere permanent — notebook cover, pinned Canvas comment. Later check-ins compare against this number, so it can't be lost.</li>
+          </ul>
+          <div class="tcheckin-credit">Full credit: completion with correct form. Everyone earns it.</div>
+          <div class="tcheckin-passage-note">Paste this — 232 words · all letters, lowercase, . and , only</div>
+          <div class="tcheckin-passage">your memory is not a recording. every time you remember something, your brain rebuilds it from pieces, and it fills any gaps with what seems likely. this is why two people can walk away from the same afternoon holding two different versions of it, and both of them can be certain they are right. researchers have shown this in careful studies. they ask people to read a list of related words, then later ask which words were on the list. people confidently name words that were never there, as long as those words fit the pattern of the others. the brain is not being lazy. it is doing what it evolved to do, which is find the gist of a thing and hold onto that rather than store every detail. this has real weight in courtrooms, where a witness who feels sure is often believed more than a witness who hesitates. confidence and accuracy are not the same thing, and the gap between them has changed how careful investigators handle what people tell them. the useful lesson is smaller and more personal. if you want to hold onto something, write it down close to when it happened. do not trust that a clear memory is a correct one. your brain is a storyteller first and a filing cabinet second, and it would rather give you a good story than an exact one.</div>
+          <div class="tcheckin-footnote">Lowercase on purpose — the baseline must be comparable to R10 and R18, and neither of those can use capitals.</div>
+        </div>
+
+        <div class="tcheckin-detail" data-tcheckin="4">
+          <div class="tcheckin-title">R4 · The Routine · 1 min · 5 pts, completion</div>
+          <div class="tcheckin-settings">Settings: 1 minute · Target WPM: leave blank · Target accuracy: leave blank</div>
+          <div class="tcheckin-h">How it runs</div>
+          <ul class="notes-list">
+            <li>Nobody is being measured today. This is the rotation where students learn the countdown so it's automatic for the rest of the year.</li>
+            <li>Run it exactly as described in "What a check-in looks like" above. Slow down and narrate it the first time.</li>
+            <li>Say this before you start, because it prevents a lot of discouragement: your number today may be lower than your baseline, and that is supposed to happen. They're learning correct fingers instead of the hunt-and-peck they walked in with, and that always slows people down before it speeds them up.</li>
+            <li>Do not record WPM or accuracy in the gradebook this rotation. Students record their own numbers; that's all.</li>
+          </ul>
+          <div class="tcheckin-credit">Full credit: took the test, wrote down both numbers, followed the countdown. Speed and accuracy are not scored at R4.</div>
+          <div class="tcheckin-passage-note">Paste this — 97 words · home row + top row only</div>
+          <div class="tcheckin-passage">jet flew sky high star stars light years far away out there try harder first step hardest step get it right sit up straight put feet flat rest wrists eyes up slow is okay fast will follow later quality first speed after that the truth is real skill takes hours she who tries daily gets there faster just keep at it stay steady hold your goal tight you are alright do it your way today great work today just keep it up talk it out ask for help if you slip up that is the whole idea</div>
+          <div class="tcheckin-footnote">By R4 students have had roughly 30 minutes of typing. That's why this one isn't scored on performance.</div>
+        </div>
+
+        <div class="tcheckin-detail" data-tcheckin="6">
+          <div class="tcheckin-title">R6 · Accuracy Gauntlet · 3 min · 5 pts</div>
+          <div class="tcheckin-settings">Settings: 3 minutes · Target WPM: leave blank · Target accuracy: 95%</div>
+          <div class="tcheckin-h">How it runs</div>
+          <ul class="notes-list">
+            <li>Announce before starting, clearly: speed is not scored today at all. Go as slowly as you want.</li>
+            <li>Run the full 3 minutes.</li>
+            <li>Score accuracy only — 95%+ = 5, 90–94% = 4, under 90% = 3.</li>
+            <li>Expect WPM to fall well below their usual. That's the intended result, not a problem.</li>
+          </ul>
+          <div class="tcheckin-credit">Full credit: 95%+ accuracy = 5 pts. Speed is not part of the score.</div>
+          <div class="tcheckin-passage-note">Paste this — 288 words · home row + top row only</div>
+          <div class="tcheckin-passage">sit up straight keep your feet flat rest your wrists lightly look here at the words let it all stay put you will get there the first two rows are yours the letters sit right where they were you did it he did it she did it they all got it try it three or four passes it is okay to go slow fast will follow later quality first speed after short words help you start here are a few to type the quiet street the tall trees the gold light the free hours the deep pool the wide door the old floor her tired feet his tight shoes their world today our great work a quiet day a great year a short trip a full house a fair task we type they type she types he types you type it works if you write it out you hold it if you say it aloud you hear it if you type it well you keep it the first hour is the hard part the fifth hour is easier the fiftieth hour is quiet hold your posture ask if it hurts stop if it does that is the rule this row that row your row our row the top row a whole page starts as a word a word starts as a letter a letter starts as a keystroke three of your digits stay quiet while the others do the work push it aside get to it today water later letter greater joke jokes joker task tasks tools old gold hold told sold fold sight light right tight flight slight day days today ways always stay play quality first speed after quality first speed after quality first speed after</div>
+          <div class="tcheckin-footnote">Long and repetitive by necessity. Accuracy is what's scored, so repetition does no harm.</div>
+        </div>
+
+        <div class="tcheckin-detail" data-tcheckin="8">
+          <div class="tcheckin-title">R8 · Blind Draw · 1 min · 5 pts</div>
+          <div class="tcheckin-settings">Settings: 1 minute · Target WPM: 18 · Target accuracy: 86%</div>
+          <div class="tcheckin-h">How it runs</div>
+          <ul class="notes-list">
+            <li>Before starting, every student covers the on-screen keyboard guide — a sticky note or folded index card over that part of the screen works.</li>
+            <li>Run the minute. Watch for students glancing down at their hands. Remind them; don't penalize. The point is to expose the habit, not punish it.</li>
+            <li>Score accuracy only. Ignore speed entirely.</li>
+            <li>This is your last read on form before the graded test in two rotations. Note anyone who struggled.</li>
+          </ul>
+          <div class="tcheckin-credit">Full credit: finish the minute with 70% or better accuracy. Goal: 18 WPM / 86%.</div>
+          <div class="tcheckin-passage-note">Paste this — 160 words · adds v, m, c and the comma</div>
+          <div class="tcheckin-passage">try it out, take it slow, let it all flow music helps some people focus, for others it just cuts up their thoughts move slower, aim for every letter, let the speed come to you we all have a limit today, we will have a higher limit later much of the trick is your posture, sit tall, keep your wrists quiet form first, force later, always a copy of the words sits right there, you may look at it, just do it well speed comes free if the form is there first quality, accuracy, care, three words for the same idea type a while, rest a while, come to it later it is a craft, valid work, real skill, a life tool what you practice, you keep, what you skip, you lose it is okay to slow, it is okay to stop, it is okay to try it twice the same rule cuts across every skill you will ever try</div>
+          <div class="tcheckin-footnote">Still no b, n, z, x or period — those come later. Commas do the work of sentence breaks here.</div>
+        </div>
+
+        <div class="tcheckin-detail" data-tcheckin="10">
+          <div class="tcheckin-title">R10 · GRADED — Midquarter · 3 min · 50 pts</div>
+          <div class="tcheckin-settings">Settings: 3 minutes · Target WPM: 20 · Target accuracy: 88%</div>
+          <div class="tcheckin-h">How it runs</div>
+          <ul class="notes-list">
+            <li>Remind them the form deduction is live: 10 points off for hunt-and-peck, wrong fingers, or looking down at the keyboard.</li>
+            <li>Say out loud that nobody finishes the passage and that this is expected.</li>
+            <li>Run 3 minutes. Circulate and note form problems on paper as you go — you cannot judge form from the results screen afterwards.</li>
+            <li>Score against 20 WPM / 88% using the sliding scale, then apply any form deductions.</li>
+          </ul>
+          <div class="tcheckin-credit">Full credit: sliding scale below. Minimum 70% for any student who improved since baseline.</div>
+          <div class="tcheckin-passage-note">Paste this — 245 words · all letters, lowercase, . and , only</div>
+          <div class="tcheckin-passage">the deep ocean is the least explored place anywhere near us. we have better maps of the surface of mars than we do of our own sea floor, and the reason is simple physics. light gives out after a few hundred meters, radio waves do not travel well through salt water, and the pressure at the bottom would crush almost anything we could build cheaply. so we map the ocean with sound instead, sending pulses down and timing how long they take to come back. what lives down there keeps surprising people. for a long time scientists assumed that life needed sunlight somewhere in the chain. then in the late twentieth century a research team found hot vents on the sea floor crowded with tube worms, crabs, and thick mats of bacteria. nothing there depended on the sun at all. the bacteria were pulling energy out of chemicals in the vent water, and everything else was living off the bacteria. that single discovery changed what biologists thought was possible, and it changed where astronomers started looking for life on other worlds. the practical side matters too. deep water currents move heat around the planet and shape weather everywhere, so a gap in our understanding of the ocean is a gap in our understanding of the climate. there are ships mapping the sea floor right now, and the work will take decades. most of what they find will be mud. some of it will not be.</div>
+          <div class="tcheckin-footnote">GRADED. No capitals, numbers, symbols or apostrophes — none of those have been taught.</div>
+        </div>
+
+        <div class="tcheckin-detail" data-tcheckin="12">
+          <div class="tcheckin-title">R12 · Heatmap Autopsy · ~10 min · 5 pts · no test</div>
+          <div class="tcheckin-settings">Settings: no test to create.</div>
+          <div class="tcheckin-h">How it runs</div>
+          <ul class="notes-list">
+            <li>Students open their TypingClub key-accuracy view — the keyboard diagram showing per-key accuracy.</li>
+            <li>Screenshot it and submit to Canvas.</li>
+            <li>In the same submission they name their 3 worst keys and write one sentence on how they'll fix them.</li>
+            <li>Timing matters here: this lands two rotations after the graded test, so students are diagnosing from fresh, real data rather than guessing.</li>
+            <li>Keep these. This is your diagnostic tool for any student who plateaus later in the year.</li>
+          </ul>
+          <div class="tcheckin-credit">Full credit: screenshot + 3 keys named + one fix sentence.</div>
+        </div>
+
+        <div class="tcheckin-detail" data-tcheckin="14">
+          <div class="tcheckin-title">R14 · Beat Your PR · 1 min · 5 pts</div>
+          <div class="tcheckin-settings">Settings: 1 minute · Target WPM: 22 · Target accuracy: 88%</div>
+          <div class="tcheckin-h">How it runs</div>
+          <ul class="notes-list">
+            <li>Students look up their baseline number from R1 and write it at the top of a scrap of paper before starting.</li>
+            <li>Run the minute using passage 1. One attempt.</li>
+            <li>Compare to their baseline, never to the class.</li>
+            <li>This lands ten sessions in, right after the Heatmap check-in, so most students will clear their baseline comfortably. That timing is deliberate — asking for it any earlier sets them up to fail while their form is still being rebuilt.</li>
+            <li>Passages 2 and 3 are spares: make-up tests, or a second attempt if you have time.</li>
+          </ul>
+          <div class="tcheckin-credit">Full credit: beat baseline by any amount = 5. Tie = 4. Below baseline = 3, and check that student's form. Goal: 22 WPM / 88%.</div>
+          <div class="tcheckin-passage-note">Paste this — passage 1 — 87 words · all letters, lowercase</div>
+          <div class="tcheckin-passage">sleep is not the brain shutting off. during deep sleep your brain runs a rinse cycle, pushing fluid through itself to clear out waste that builds up while you are awake. this only happens properly when you are unconscious, which is part of why one bad night leaves you foggy. teenagers need more sleep than adults, and their internal clocks genuinely run later, so early school start times fight biology rather than laziness. several districts moved their bell times later and watched both attendance and grades improve.</div>
+          <div class="tcheckin-passage-note">Spare — 84 words</div>
+          <div class="tcheckin-passage">a volcano is a pressure release valve. deep under the surface, rock melts and gathers, and because that melt is lighter than the solid rock around it, it pushes upward until something gives. the shape of the mountain tells you what kind of eruption to expect. wide gentle slopes mean runny lava that flows for miles, while steep cones mean thick sticky magma that traps gas until it explodes. geologists watch for swelling ground, small tremors, and shifts in the gases escaping from vents.</div>
+          <div class="tcheckin-passage-note">Spare — 87 words</div>
+          <div class="tcheckin-passage">the moon is drifting away from us, a few centimeters every year. tides are the cause. the moon pulls the oceans into bulges, the earth rotates underneath those bulges, and the friction slowly bleeds energy out of the spin of our planet and hands it to the moon. so our days are getting longer and the moon is getting farther. hundreds of millions of years ago a day lasted closer to twenty two hours, and you can read that record in the growth bands of ancient coral.</div>
+        </div>
+
+        <div class="tcheckin-detail" data-tcheckin="16">
+          <div class="tcheckin-title">R16 · Speed vs. Accuracy Lab · 2 × 1 min · 5 pts</div>
+          <div class="tcheckin-settings">Settings: 1 minute, run twice · Target WPM: 23 · Target accuracy: 90%</div>
+          <div class="tcheckin-h">How it runs</div>
+          <ul class="notes-list">
+            <li>Run 1: tell them to type as fast as they possibly can and ignore mistakes. Record adjusted WPM and accuracy.</li>
+            <li>Run 2: tell them to type perfectly clean and go as slowly as they need. Record both numbers again.</li>
+            <li>Students submit all four numbers plus one answer: which run had the higher adjusted WPM?</li>
+            <li>Don't tell them the answer in advance. Most discover the clean run scored higher, and finding that out themselves is the entire lesson.</li>
+          </ul>
+          <div class="tcheckin-credit">Full credit: both runs completed, all four numbers submitted, and the question answered. Goal: 23 WPM / 90%.</div>
+          <div class="tcheckin-passage-note">Paste this — run 1, go fast — 82 words</div>
+          <div class="tcheckin-passage">chocolate started out as a drink, and a bitter one. for most of its history it was ground cacao mixed with water and spices, served without any sugar at all, and it mattered enough in some cultures that the beans were used as money. the sweet solid bar is a fairly recent invention, arriving only after machines could press the fat out of the bean and recombine it. what you buy today would be unrecognizable to the people who first grew it.</div>
+          <div class="tcheckin-passage-note">Paste this — run 2, go clean — 79 words</div>
+          <div class="tcheckin-passage">a paper airplane flies for the same reason a real one does. air moving over the wing is pushed downward, and the wing gets pushed up in return. the difference is scale. a paper plane is so light that tiny flaws matter enormously, so a crease that is slightly off center will send it into a curve. the record for the longest paper plane flight is measured in seconds, and the folds behind it took years to work out.</div>
+          <div class="tcheckin-footnote">Matched in difficulty so the comparison is fair.</div>
+        </div>
+
+        <div class="tcheckin-detail" data-tcheckin="18">
+          <div class="tcheckin-title">R18 · GRADED — Q1 Final · 5 min · 100 pts</div>
+          <div class="tcheckin-settings">Settings: 5 minutes · Target WPM: 25 · Target accuracy: 90%</div>
+          <div class="tcheckin-h">How it runs</div>
+          <ul class="notes-list">
+            <li>Same two reminders as R10: the form deduction is live, and nobody finishes the passage.</li>
+            <li>Add one more: this is 5 minutes, longer than anything they've done. Stamina is part of what's being tested and their speed will sag near the end. That's normal.</li>
+            <li>Circulate and record form problems on paper during the test.</li>
+            <li>Score against 25 WPM / 90% on the sliding scale, then apply form deductions.</li>
+          </ul>
+          <div class="tcheckin-credit">Full credit: sliding scale below. Minimum 70% for any student who improved since R10.</div>
+          <div class="tcheckin-passage-note">Paste this — 322 words · all letters, lowercase, . and , only</div>
+          <div class="tcheckin-passage">the layout of the keyboard you are using was not designed to help you type. it was designed around the limits of a machine that no longer exists, and it has outlasted that machine by well over a century. early typewriters had a mechanical problem. each key swung a metal arm, and if you struck two neighboring arms in quick succession they collided and jammed. the fix was to scatter the most common letter pairs to opposite sides of the keyboard, so the arms would have time to fall back before their neighbor came up. that scattering is why the letters sit in the strange order they do. it was a solution to a problem of springs and levers, and it worked. then the machine changed and the layout did not. typists had already learned it, schools were already teaching it, and every new machine had to match what people already knew or nobody would buy it. alternative layouts have been designed since, some of them measurably faster, and none of them ever caught on. the cost of retraining every typist in the world was always higher than the gain. this pattern shows up everywhere once you look for it. the width of railway tracks, the position of pedals in a car, the way dates are written in different countries. these are not the best available answers. they are the first answers that worked well enough, locked in place by everyone else already using them. economists call it path dependence, and it explains a surprising amount of why the world looks the way it does. there is something freeing in knowing this. the arrangement under your fingers is not a law of nature and it is not optimal. it is a hundred year old workaround for a jam in a machine you will never see. you are still going to learn it, because everyone else did, and that is exactly the point.</div>
+          <div class="tcheckin-footnote">GRADED. Still no capitals — shift is only one rotation old at this point. Capitals wait for Q2.</div>
+        </div>
+
+        <div class="tcheckin-detail" data-tcheckin="20">
+          <div class="tcheckin-title">R20 · Data Story · ~20 min · 10 pts · no test</div>
+          <div class="tcheckin-settings">Settings: no test to create.</div>
+          <div class="tcheckin-h">How it runs</div>
+          <ul class="notes-list">
+            <li>Students open Google Sheets and enter every check-in result from the quarter from their own records.</li>
+            <li>Build one line chart: rotation on the x axis, WPM and accuracy as two separate series.</li>
+            <li>Below the chart they write 2 sentences — what the trend shows, and one thing they will change.</li>
+            <li>This runs after the R18 final, so the chart covers the whole quarter including the big test.</li>
+            <li>It doubles as a spreadsheet assessment. Grade the chart construction too if you want the points to go further.</li>
+          </ul>
+          <div class="tcheckin-credit">Full credit: chart with both series + 2 sentences of interpretation.</div>
+        </div>
+
+      </div>
+
+      <div class="tcheckin-h">Grading the two graded tests</div>
+      <p>Don't score these pass/fail. A student who moves from 11 to 19 WPM has done good work.</p>
+      <div class="tw-table">
+      <table class="ref-table">
+        <tr><th>Result</th><th>Score</th><th>Notes</th></tr>
+        <tr><td>Meets or beats both targets</td><td>100%</td><td>Full credit</td></tr>
+        <tr><td>Meets one target, within 3 of the other</td><td>92%</td><td>Essentially there</td></tr>
+        <tr><td>Within 3 of both</td><td>85%</td><td>Close</td></tr>
+        <tr><td>Within 6 of both</td><td>75%</td><td>Developing</td></tr>
+        <tr><td>Missed, but improved since the last graded test</td><td>70% floor</td><td>Growth counts</td></tr>
+        <tr><td>Missed, no improvement</td><td>60%</td><td>Have a conversation</td></tr>
+      </table>
+      </div>
+      <div class="tcheckin-rule">Minus 10 points — form. Take 10 points off either graded test for hunt-and-peck, wrong fingers, or looking down at the keyboard. You have to record this on paper while they type; the results screen won't tell you. Say it in Rotation 1 and actually apply it on the R10 test, or students won't believe it for the rest of the year.</div>
+
+      <div class="tcheckin-h">Spare passages</div>
+      <p>Backups for make-up tests, or if a passage gets shared between class periods before you run it.</p>
+      <div class="tcheckin-passage-note">Spare — 1 minute, early rotations (home row + top row only, 87 words)</div>
+      <div class="tcheckin-passage">the quiet water tall tree gold light first day free trees great party short road old shoes deep pool true here there they were she said we saw you took it out our house help hope keep tight right sight all day today always stay play players start sort part apart art artist hurt hurry water later letter greater world word words her his hers theirs those these that what where who why how while will would should quite quality talk task tasks alike aloud tools three</div>
+      <div class="tcheckin-passage-note">Spare — full alphabet, 75 words</div>
+      <div class="tcheckin-passage">sharks have been around far longer than trees. the first sharks appeared over four hundred million years ago, before the first forests existed, and they have survived every mass extinction since. their skeletons are cartilage rather than bone, which is lighter and more flexible, and their skin is covered in tiny tooth like scales that cut down drag as they swim. most species are far smaller and far less interested in people than films suggest.</div>
+      <div class="tcheckin-passage-note">Spare — full alphabet, 81 words</div>
+      <div class="tcheckin-passage">a bicycle is one of the most efficient machines ever built. a person on a bike travels farther on the same energy than almost any animal, including a person walking, because the wheels let you glide instead of lifting your body with every step. balancing one is stranger than it looks. a moving bike partly steers itself, and the front wheel turns into a lean without being asked, which is why staying upright feels easy once you stop thinking about it.</div>
+
+      <div class="tcheckin-h">Why the early passages read strangely</div>
+      <p>Through Rotation 6 students only know the home row and the top row — no z, x, c, v, b, n or m, and no comma or period, because those live on the bottom row. That rules out the words and, in, on, not, can and be, which is why R4 and R6 are word lists rather than sentences. R8 gains commas and three more letters, so it reads as comma-spliced phrases. From R10 on the full alphabet is available and the passages are normal prose. Tell students why — they find it interesting rather than annoying.</p>
     </details>
 
   </div>
@@ -1458,6 +1740,16 @@ document.getElementById('teacher-gear').addEventListener('click', openTeacherMod
 document.getElementById('teacher-badge').addEventListener('click', openTeacherModal);
 document.getElementById('teacher-badge').style.display = isTeacherMode() ? 'flex' : 'none';
 document.querySelectorAll('.teacher-only').forEach(btn => { btn.style.display = isTeacherMode() ? '' : 'none'; });
+
+document.querySelectorAll('.tcheckin-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tcheckin-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tcheckin-detail').forEach(d => d.classList.remove('active'));
+    const panel = document.querySelector(`.tcheckin-detail[data-tcheckin="${btn.dataset.r}"]`);
+    if(panel) panel.classList.add('active');
+  });
+});
 
 renderCalendarMonth();
 renderList();
