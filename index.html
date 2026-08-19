@@ -327,10 +327,60 @@ p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:au
 }
 .reslink:hover{background:var(--accent-dim);}
 
+/* Reference tables (teacher mode) */
+details.ref{
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:16px 20px;margin-bottom:14px;box-shadow:var(--shadow);
+}
+details.ref summary{
+  font-family:'Baloo 2',sans-serif;font-weight:700;color:var(--text);font-size:0.92rem;
+  cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;
+}
+details.ref summary::-webkit-details-marker{display:none;}
+details.ref summary::before{content:"▸";color:var(--accent);transition:transform 0.15s;}
+details.ref[open] summary::before{transform:rotate(90deg);}
+table.ref-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:0.85rem;}
+table.ref-table th{
+  background:var(--ink);color:#fff;text-align:left;padding:8px 10px;
+  font-family:'Baloo 2',sans-serif;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.3px;
+}
+table.ref-table td{padding:8px 10px;border-bottom:1px solid var(--border);}
+table.ref-table tr:nth-child(even) td{background:var(--paper);}
+.tw-table{overflow-x:auto;}
+ul.notes-list{padding-left:22px;margin-top:10px;}
+ul.notes-list li{margin-bottom:8px;font-size:0.92rem;}
+
 footer{
   text-align:center;color:var(--muted);font-size:0.8rem;margin-top:40px;padding:0 20px;
   font-family:'Baloo 2',sans-serif;
 }
+
+/* Discreet teacher-mode controls */
+.teacher-gear{
+  position:fixed;bottom:14px;right:14px;z-index:150;
+  width:34px;height:34px;border-radius:50%;border:1px solid var(--border);
+  background:var(--card);opacity:0.35;font-size:1rem;cursor:pointer;
+  transition:opacity 0.15s;
+}
+.teacher-gear:hover{opacity:0.9;}
+.teacher-badge{
+  position:fixed;top:10px;right:10px;z-index:150;
+  background:var(--ink);color:#fff;font-family:'Baloo 2',sans-serif;font-weight:700;
+  font-size:0.78rem;padding:6px 12px;border-radius:999px;cursor:pointer;
+  box-shadow:var(--shadow);
+}
+.teacher-badge #teacher-badge-off{font-weight:500;opacity:0.75;}
+.password-form{display:flex;flex-direction:column;gap:12px;align-items:center;padding:10px 0 4px;}
+.password-form input{
+  font-family:'Inter',sans-serif;font-size:1rem;padding:9px 12px;border-radius:6px;
+  border:1px solid var(--border);width:100%;max-width:240px;text-align:center;
+}
+.password-form button{
+  border:1px solid var(--accent);background:var(--accent);color:#fff;
+  padding:8px 20px;border-radius:999px;font-weight:700;font-family:'Baloo 2',sans-serif;
+  cursor:pointer;
+}
+.password-form .pw-error{color:var(--red);font-size:0.82rem;min-height:1.1em;}
 </style>
 </head>
 <body>
@@ -352,6 +402,8 @@ footer{
 <nav class="tabs">
   <button class="active" data-page="calendar">📅 Calendar</button>
   <button data-page="gradesheets">📊 Grade Sheets</button>
+  <button data-page="links" class="teacher-only" style="display:none;">🔗 Quick Links</button>
+  <button data-page="reference" class="teacher-only" style="display:none;">📋 Reference</button>
 </nav>
 
 <div class="wrap">
@@ -416,11 +468,231 @@ footer{
     <p class="section-sub">Q3–Q4 gradesheets will show up here as their links come in.</p>
   </div>
 
+  <!-- QUICK LINKS DASHBOARD (teacher mode only) -->
+  <div class="page" id="page-links">
+
+  <div class="qtr-block active" data-qtr="1">
+
+    <div class="qlgroup">
+      <h3>Setup &amp; Procedures</h3>
+      <div class="qlgrid">
+        <a class="qltile c-setup" target="_blank" rel="noopener" href="https://canva.link/subxpsbvciyglgb"><span class="qlicon">📄</span><span class="qllabel">Syllabus</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-setup" target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1YpqNWeCPYOvZDbP_bu6ZYkJyOIQW1XbdDihA6NzXFsk/edit?usp=sharing"><span class="qlicon">🖥️</span><span class="qllabel">Classroom Procedures Slides</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-setup" target="_blank" rel="noopener" href="https://www.gimkit.com/view/6826230fd0e5fd70fdec251d"><span class="qlicon">🎮</span><span class="qllabel">Procedures &amp; Policies Gimkit</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-setup" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1kQ3NDYyRc9kdBjPxdFeTlIsJwoQ1zxFyVoMS6m065VI/edit?usp=sharing"><span class="qlicon">📝</span><span class="qllabel">Printing Etiquette Assignment</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-setup" target="_blank" rel="noopener" href="https://canva.link/viofqvgo0xwcmml"><span class="qlicon">🖨️</span><span class="qllabel">Printing Etiquette Worksheet</span><span class="qlarrow">↗</span></a>
+      </div>
+    </div>
+
+    <div class="qlgroup">
+      <h3>Typing</h3>
+      <div class="qlgrid">
+        <a class="qltile c-typing" target="_blank" rel="noopener" href="https://www.edclub.com/signin"><span class="qlicon">⌨️</span><span class="qllabel">Typing Club Sign-In</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-typing" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1inKqp5XbIzasS6gZCGrG22zQ7zLgubZbayYm_6LFQeE/edit?usp=sharing"><span class="qlicon">📄</span><span class="qllabel">Baseline Typing Test Text</span><span class="qlarrow">↗</span></a>
+      </div>
+    </div>
+
+    <div class="qlgroup">
+      <h3>Assignments &amp; Activities</h3>
+      <div class="qlgrid">
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=SMnjShkHCug"><span class="qlicon">🎥</span><span class="qllabel">Email Etiquette Video</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1vybXolw6NuZGlNQXmiqfozfFYyOHjnnM/view?usp=drive_link"><span class="qlicon">📊</span><span class="qllabel">Grade Sheet Tracking Workbook (Lessons 1–5)</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1BjZWttJGx2k-dI1Fzjnm9nPX-x8TsWATBM0Qz9TupsY/edit?usp=sharing"><span class="qlicon">📅</span><span class="qllabel">Planner Organization Intro</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://claude.ai/public/artifacts/4aca23d4-aceb-4644-8182-ce082355b296"><span class="qlicon">🎬</span><span class="qllabel">TikTok/Reel Assignment</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1CGPdhekxJgHIWtPUaCEiVAOUA2M5eum1?usp=drive_link"><span class="qlicon">🎬</span><span class="qllabel">Planner TikTok Script Folder</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1CGPdhekxJgHIWtPUaCEiVAOUA2M5eum1?usp=drive_link"><span class="qlicon">🗂️</span><span class="qllabel">Google Drive Organization Escape Room</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1QD1adpsROioVfFafQVMBe85PVEj0KDjS/view?usp=drive_link"><span class="qlicon">🎨</span><span class="qllabel">Drawing Activity</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1dWNaJrVVHO56KNYfVJpK0EXX2_D5-IaJZ6_jVV58R6I/edit?usp=sharing"><span class="qlicon">👩‍🔬</span><span class="qllabel">Women in STEM</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/1eAGufBLPbGukK3jk8rRwlOJHvCek_CcSTt-2e95-ZYI/edit?usp=drive_link"><span class="qlicon">📈</span><span class="qllabel">Grade Tracker Template</span><span class="qlarrow">↗</span></a>
+      </div>
+    </div>
+
+    <div class="qlgroup">
+      <h3>Notes &amp; Projects</h3>
+      <div class="qlgrid">
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1pEnmD0XOYfMKAmH_gvZtIypaVIZEsm7WGhHXNoJLgsk/edit?usp=sharing"><span class="qlicon">📝</span><span class="qllabel">Simple Outline Notes</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1LImuP-ozApCsNEpi99VpBsBiYobVf7o1_ll83n5_Jl8/edit?usp=sharing"><span class="qlicon">📝</span><span class="qllabel">Simple Outline Practice</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1aUHENUPKaGW170ULf62njDWpy8I3AEA7CeYmsIfDMRc/edit?usp=sharing"><span class="qlicon">💻</span><span class="qllabel">Computer Parts Notes</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/19UmkLZRYNO7MQSbpqnfhzM8hAtOqEK8M/edit?usp=sharing&ouid=116105544359264403410&rtpof=true&sd=true"><span class="qlicon">🗺️</span><span class="qllabel">Mind Map Notes</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1O53gGJ4qkkrJj2l7Zzofnq_zuHXDBKH3sTmL-wp_s4g/edit?usp=sharing"><span class="qlicon">✂️</span><span class="qllabel">Cricut Slides</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://docs.google.com/document/d/175C8LKRK7NP6dKNNe4Hxi_aS21oDmtW5ll5gg045L9U/edit?usp=sharing"><span class="qlicon">🖨️</span><span class="qllabel">Work Day + Print Day</span><span class="qlarrow">↗</span></a>
+      </div>
+    </div>
+
+    <p class="section-sub">Links above are pulled straight from the pacing guide — click straight through instead of hunting through the doc.</p>
+  </div>
+
+  <div class="qtr-block" data-qtr="2">
+
+    <div class="qlgroup">
+      <h3>GD1 Wrap-Up &amp; Binary</h3>
+      <div class="qlgrid">
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://docs.google.com/document/d/175C8LKRK7NP6dKNNe4Hxi_aS21oDmtW5ll5gg045L9U/edit?usp=sharing"><span class="qlicon">🗺️</span><span class="qllabel">Mind Map (Continue / Finish)</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://binarynotes.netlify.app/#1"><span class="qlicon">🔢</span><span class="qllabel">Binary Notes</span><span class="qlarrow">↗</span></a>
+      </div>
+    </div>
+
+    <div class="qlgroup">
+      <h3>Computer Parts Lab</h3>
+      <div class="qlgrid">
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1elWirG1BCDQ7ofVDqZjEbu62ctPuxs9ZrmvNAEtYHXA/edit?usp=drive_link"><span class="qlicon">🖥️</span><span class="qllabel">Computer Parts Lab</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1g7BJMApX8oe0cs2Z5uvwlw7jQaE0DVzAaX-vo0co1W8/edit?usp=drive_link"><span class="qlicon">🔍</span><span class="qllabel">Computer Parts Lab Practical</span><span class="qlarrow">↗</span></a>
+      </div>
+    </div>
+
+    <div class="qlgroup">
+      <h3>Branding &amp; Start-Up Challenge</h3>
+      <div class="qlgrid">
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1wXXh5iq3WTFs_cL55jSllBCbKeNbSiVGM77ekhQekxE/edit?usp=sharing"><span class="qlicon">🏷️</span><span class="qllabel">Branding Lecture Slides</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1xHI9j_adWDxSHdETtzFElKjC8PU5RB_y/view?usp=drive_link"><span class="qlicon">🎥</span><span class="qllabel">Branding Video</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://docs.google.com/document/d/10kj1aPP9hSy8j9SUg2SVozsGrliAe2fzz5E6fa44jFk/edit?usp=drive_link"><span class="qlicon">🎨</span><span class="qllabel">Color Picker Scavenger Hunt</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-assign" target="_blank" rel="noopener" href="https://canva.link/9xp2sz2r5ie45hm"><span class="qlicon">🚀</span><span class="qllabel">Start-Up Challenge (All Steps)</span><span class="qlarrow">↗</span></a>
+      </div>
+    </div>
+
+    <p class="section-sub">Links above are pulled straight from the Q2 pacing guide.</p>
+  </div>
+
+  </div>
+
+  <!-- REFERENCE (teacher mode only) -->
+  <div class="page" id="page-reference">
+    <h2 class="section-title">Quick Reference</h2>
+
+  <div class="qtr-block active" data-qtr="1">
+
+    <details class="ref">
+      <summary>⌨️ Typing Goals at a Glance</summary>
+      <div class="tw-table">
+      <table class="ref-table">
+        <tr><th>Rotations</th><th>Week</th><th>Typing Jungle Lessons</th><th>WPM Goal</th><th>Accuracy</th><th>Assessment</th></tr>
+        <tr><td>R1–2</td><td>1</td><td>1–25</td><td>—</td><td>—</td><td>Baseline (ungraded)</td></tr>
+        <tr><td>R3–4</td><td>2</td><td>25–50</td><td>10</td><td>70%</td><td>Check-in #1 (5 pts)</td></tr>
+        <tr><td>R5–6</td><td>3–4</td><td>50–80</td><td>12</td><td>75%</td><td>Check-in #2 (5 pts)</td></tr>
+        <tr><td>R7–8</td><td>5–6</td><td>80–110</td><td>14</td><td>75%</td><td>Check-in #3 (5 pts)</td></tr>
+        <tr><td>R9–10</td><td>7–8</td><td>110–130</td><td>15</td><td>80%</td><td>Assessment #1 (graded)</td></tr>
+        <tr><td>R11–12</td><td>9–10</td><td>130–145</td><td>16</td><td>80%</td><td>Test 1 (graded)</td></tr>
+        <tr><td>R13–14</td><td>11–12</td><td>145–150 (ceiling)</td><td>17</td><td>80%</td><td>Check-in #6 (5 pts)</td></tr>
+        <tr><td>R15–16</td><td>13–14</td><td>150 (speed drills)</td><td>18</td><td>80%</td><td>Check-in #7 (5 pts)</td></tr>
+        <tr><td>R17–18</td><td>15–16</td><td>150 (speed drills)</td><td>19</td><td>80%</td><td>Check-in #8 (5 pts)</td></tr>
+        <tr><td>R19–20</td><td>17–18</td><td>All lessons through 150</td><td>20</td><td>80%</td><td>Final Assessment (graded)</td></tr>
+      </table>
+      </div>
+    </details>
+
+    <details class="ref">
+      <summary>💻 CodeCombat — Graded Milestones (Q1)</summary>
+      <div class="tw-table">
+      <table class="ref-table">
+        <tr><th>Rotation</th><th>Due</th><th>What Students Submit</th></tr>
+        <tr><td>R12</td><td>Sep 17</td><td>🏆 CS1 Arena screenshot — shows arena attempted/completed; uploaded to Canvas</td></tr>
+      </table>
+      </div>
+      <p style="margin-top:10px;font-size:0.82rem;color:var(--muted);">Remaining CodeCombat milestones (GD1 Tabula Rasa, CS2 Arena, CS2 progress) fall in Quarter 2.</p>
+    </details>
+
+    <details class="ref">
+      <summary>🚀 Student Speed Guide (CodeCombat)</summary>
+      <div class="tw-table">
+      <table class="ref-table">
+        <tr><th></th><th>🐢 On Track (min)</th><th>🚀 Fast Finisher</th><th>🏆 Ahead of Schedule</th></tr>
+        <tr><td>CS1 (Lvl 1–10)</td><td>2–3 levels/rotation</td><td>3–5 levels/rotation</td><td>Push to next target early</td></tr>
+        <tr><td>CS1 (Lvl 11–24 + Arena)</td><td>1–2 levels/rotation</td><td>2–3 levels/rotation</td><td>Begin GD1 early</td></tr>
+        <tr><td>GD1 (Lvl 1–17)</td><td>1–2 levels/rotation</td><td>2–3 levels/rotation</td><td>Begin Tabula Rasa design early</td></tr>
+      </table>
+      </div>
+    </details>
+
+    <details class="ref">
+      <summary>📝 Teacher Notes &amp; Reminders</summary>
+      <ul class="notes-list">
+        <li><strong>Typing Jungle locks:</strong> remember to unlock lesson batches in the teacher dashboard — students cannot progress past a locked lesson.</li>
+        <li><strong>Stands and keyboards</strong> live at the front of both rooms. Push students toward independence (grabbing their own) by Rotation 4.</li>
+        <li><strong>CodeCombat teacher dashboard</strong> lets you monitor student progress in real time — glance at the class view during coding blocks.</li>
+        <li><strong>WPM goals are targets, not cutoffs.</strong> Some students will exceed them; celebrate that. Some will trail; encourage consistency over speed.</li>
+        <li><strong>Check-in screenshots</strong> can be submitted as image uploads or Google Slide inserts on Canvas — whatever is simplest for your class.</li>
+        <li><strong>Women in STEM presentations</strong> use the PVLEGS rubric. Remind students during typing and coding time that presentations are coming up.</li>
+        <li><strong>Grade Tracker:</strong> collect the Canvas sharing link as an editor in Rotation 12–13 so you only need one link for the whole quarter.</li>
+        <li><strong>Co-teacher:</strong> touch base before each rotation. Filler time in Rotation 1 can vary a lot by period — have a backup plan ready.</li>
+        <li><strong>CS1→GD1 handoff:</strong> the Arena (R10–12) is intentionally hard with two catch-up rotations before the graded attempt in R12. GD1 levels (R13+) run slower on purpose — let students play with their creations.</li>
+      </ul>
+    </details>
+
+  </div>
+
+  <div class="qtr-block" data-qtr="2">
+
+    <details class="ref">
+      <summary>⌨️ Typing Goals at a Glance — Q2</summary>
+      <div class="tw-table">
+      <table class="ref-table">
+        <tr><th>Rotations</th><th>Week</th><th>Typing Jungle Lessons</th><th>WPM Goal</th><th>Accuracy</th><th>Assessment</th></tr>
+        <tr><td>R1–2</td><td>1</td><td>150–165</td><td>TBD</td><td>TBD</td><td>Check-in #1 (5 pts)</td></tr>
+        <tr><td>R3–4</td><td>2–3</td><td>165–180</td><td>TBD</td><td>TBD</td><td>Check-in #2 (5 pts)</td></tr>
+        <tr><td>R5–6</td><td>4–5</td><td>180–195</td><td>TBD</td><td>TBD</td><td>Graded Test — Check-in 3</td></tr>
+        <tr><td>R7–8</td><td>6–7</td><td>195–210</td><td>TBD</td><td>TBD</td><td>Check-in #4 (5 pts)</td></tr>
+        <tr><td>R9–10</td><td>8–9</td><td>210–225</td><td>TBD</td><td>TBD</td><td>Check-in #5 (5 pts)</td></tr>
+        <tr><td>R11–12</td><td>10–11</td><td>225–240 (ceiling)</td><td>TBD</td><td>TBD</td><td>Check-in #6 (5 pts)</td></tr>
+        <tr><td>R13–14</td><td>12–13</td><td>240 (speed drills)</td><td>TBD</td><td>TBD</td><td>Check-in #7 (5 pts)</td></tr>
+        <tr><td>R15–16</td><td>14–15</td><td>240 (speed drills)</td><td>TBD</td><td>TBD</td><td>Graded Test — Check-in 4</td></tr>
+        <tr><td>R17–18</td><td>16–17</td><td>240 (speed drills)</td><td>TBD</td><td>TBD</td><td>Check-in #9 (5 pts)</td></tr>
+        <tr><td>R19–20</td><td>18</td><td>All lessons through 240</td><td>TBD</td><td>TBD</td><td>Q2 Final (graded)</td></tr>
+      </table>
+      </div>
+    </details>
+
+    <details class="ref">
+      <summary>💻 CodeCombat — Graded Milestones (Q2)</summary>
+      <div class="tw-table">
+      <table class="ref-table">
+        <tr><th>Rotation</th><th>Due</th><th>Points</th><th>What Students Submit</th></tr>
+        <tr><td>R3</td><td>Oct 20</td><td>100</td><td>🏆 Tabula Rasa game link — original game, working win/lose condition, 3+ GD1 concepts, written peer feedback</td></tr>
+        <tr><td>R15</td><td>Nov 21</td><td>50</td><td>🏆 CS2 progress check — Course Guide screenshot showing levels through at least Lvl 19</td></tr>
+        <tr><td>R16</td><td>Nov 25</td><td>50</td><td>🏆 CS2 Arena screenshot — best attempt; graded on effort + levels reached</td></tr>
+        <tr><td>R17</td><td>Dec 3</td><td>50</td><td>🏆 CodeCombat Portfolio — CS1 Arena + CS2 Arena + Tabula Rasa + Course Guide, one Canvas submission</td></tr>
+        <tr><td>R20</td><td>Dec 12</td><td>—</td><td>Final grades confirmed; AI question card (formative, not graded)</td></tr>
+      </table>
+      </div>
+    </details>
+
+    <details class="ref">
+      <summary>🚀 CS2 Pacing Notes (CodeCombat)</summary>
+      <ul class="notes-list">
+        <li><strong>Levels 1–7</strong> move at a reasonable clip — most students keep pace comfortably.</li>
+        <li><strong>Level 8 onward:</strong> expect about 1 level per rotation for most students. That's normal — do not rush this section.</li>
+        <li><strong>Fast finishers</strong> should work premium challenge levels rather than just racing ahead — the CS2 concepts need time to sink in.</li>
+        <li><strong>R6 has no CodeCombat</strong> — that's the Code.org Pixelation (Binary → RGB → Hex) activity instead. CodeCombat resumes R7.</li>
+        <li><strong>R19–R20</strong> are a Bridge to AI + handoff to the Q3 AI Hackathon — no new CodeCombat levels, just wrap-up and reflection.</li>
+      </ul>
+    </details>
+
+    <details class="ref">
+      <summary>📝 Teacher Notes &amp; Reminders — Q2</summary>
+      <ul class="notes-list">
+        <li><strong>Cricut overflow from Q1:</strong> have students email you to schedule IS make-up time rather than holding the whole class back.</li>
+        <li><strong>Binary to RGB connection:</strong> the Pixelation activity in R6 is a great bridge — binary becomes visual and suddenly makes sense. Lean into the "aha moment."</li>
+        <li><strong>Lesson pacing update:</strong> Q2's lesson ceiling is now 240 (was 274+ in the original draft) — the Typing Jungle numbers section doesn't get reached this quarter under the revised pacing, so that content shifts to Q3.</li>
+        <li><strong>Start-Up Challenge buy-in is everything</strong> — if students are excited about their product idea, the rest flows. Spend real time on the brainstorm in R9.</li>
+        <li><strong>Co-teacher coordination:</strong> R4–R5 lab days require split scheduling for some periods. Set a timer and be strict about the 35-min swap.</li>
+        <li><strong>Grade Tracker:</strong> remind students to update their Q2 sheet around R6 so you can access it mid-quarter for grading.</li>
+        <li><strong>Typing form:</strong> the 10-pt deduction for incorrect form is new this quarter — announce it clearly in R5 so students aren't surprised.</li>
+        <li><strong>Code.org Pixelation:</strong> preview the lesson yourself before R6 so you can guide students who get stuck on the RGB/Hex toggle.</li>
+        <li><strong>Presentations (R19–R20):</strong> print the PVLEGS rubric for each presenter ahead of time to streamline scoring.</li>
+      </ul>
+    </details>
+
+  </div>
+
+  </div>
+
 
 </div>
 
 
 <footer>🐻 Computing &amp; Digital Dynamics · Mr. Lindeman · 2026–2027</footer>
+
+<button id="teacher-gear" class="teacher-gear" title="Settings" aria-label="Settings">⚙️</button>
+<div id="teacher-badge" class="teacher-badge" style="display:none;">🐻 Teacher Mode <span id="teacher-badge-off">— tap to turn off</span></div>
 
 <div class="overlay" id="overlay">
   <div class="modal" id="modal"></div>
@@ -632,6 +904,7 @@ function rotationUnlockDate(rot){
   return parseISODate(days[0].date);
 }
 function isRotationUnlocked(rot){
+  if(isTeacherMode()) return true;
   const unlock = rotationUnlockDate(rot);
   if(!unlock) return false;
   const today = new Date();
@@ -1110,6 +1383,81 @@ document.querySelectorAll('.quarter-switch button').forEach(btn => {
     });
   });
 });
+
+// --- Teacher mode: unlocks every rotation and reveals Quick Links + Reference tabs ---
+// This is a static site with no backend — this password is a light convenience gate for
+// the teacher's own use, not real security. Anyone viewing page source could find it.
+const TEACHER_PASSWORD = "csfteacher!";
+function isTeacherMode(){ return localStorage.getItem('teacherMode') === '1'; }
+function setTeacherMode(on){
+  if(on) localStorage.setItem('teacherMode', '1');
+  else localStorage.removeItem('teacherMode');
+  document.getElementById('teacher-badge').style.display = isTeacherMode() ? 'flex' : 'none';
+  document.querySelectorAll('.teacher-only').forEach(btn => { btn.style.display = isTeacherMode() ? '' : 'none'; });
+  if(!isTeacherMode()){
+    const activePage = document.querySelector('nav.tabs button.active');
+    if(activePage && (activePage.dataset.page === 'links' || activePage.dataset.page === 'reference')){
+      document.querySelector('nav.tabs button[data-page="calendar"]').click();
+    }
+  }
+  renderCalendarMonth();
+  renderList();
+}
+function openTeacherModal(){
+  if(isTeacherMode()){
+    modalEl.className = 'modal';
+    modalEl.innerHTML = `
+      <button class="close" onclick="closeModal()">✕</button>
+      <div class="locked-body">
+        <div class="locked-emoji">🐻</div>
+        <h4>Teacher Mode is on</h4>
+        <p>Every rotation is unlocked, and Quick Links + Reference are visible in the nav.</p>
+        <div class="password-form">
+          <button id="teacher-off-btn">Turn off</button>
+        </div>
+      </div>
+    `;
+    document.getElementById('teacher-off-btn').addEventListener('click', () => {
+      setTeacherMode(false);
+      closeModal();
+    });
+    overlayEl.classList.add('show');
+    return;
+  }
+  modalEl.className = 'modal';
+  modalEl.innerHTML = `
+    <button class="close" onclick="closeModal()">✕</button>
+    <div class="locked-body">
+      <div class="locked-emoji">⚙️</div>
+      <h4>Teacher Mode</h4>
+      <p>Enter the password to unlock every rotation and reveal Quick Links + Reference.</p>
+      <div class="password-form">
+        <input type="password" id="teacher-pw-input" placeholder="Password" autocomplete="off">
+        <div class="pw-error" id="teacher-pw-error"></div>
+        <button id="teacher-pw-submit">Unlock</button>
+      </div>
+    </div>
+  `;
+  const submit = () => {
+    const input = document.getElementById('teacher-pw-input');
+    if(input.value === TEACHER_PASSWORD){
+      setTeacherMode(true);
+      closeModal();
+    } else {
+      document.getElementById('teacher-pw-error').textContent = 'Incorrect password.';
+      input.value = '';
+      input.focus();
+    }
+  };
+  document.getElementById('teacher-pw-submit').addEventListener('click', submit);
+  document.getElementById('teacher-pw-input').addEventListener('keydown', (e) => { if(e.key === 'Enter') submit(); });
+  overlayEl.classList.add('show');
+  document.getElementById('teacher-pw-input').focus();
+}
+document.getElementById('teacher-gear').addEventListener('click', openTeacherModal);
+document.getElementById('teacher-badge').addEventListener('click', openTeacherModal);
+document.getElementById('teacher-badge').style.display = isTeacherMode() ? 'flex' : 'none';
+document.querySelectorAll('.teacher-only').forEach(btn => { btn.style.display = isTeacherMode() ? '' : 'none'; });
 
 renderCalendarMonth();
 renderList();
