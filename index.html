@@ -317,19 +317,6 @@ p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:au
 .msection .mlabel{font-size:1.25rem;}
 .msection ul{padding-left:28px;}
 .msection li{margin-bottom:10px;}
-.agenda-checkin-link{
-  background:none;border:none;padding:0;margin:0;text-align:left;cursor:pointer;
-  font-family:'Inter',sans-serif;font-size:1.35rem;color:var(--text);
-  border-bottom:2px dashed var(--accent);
-}
-.agenda-checkin-link:hover{color:var(--accent);}
-.agenda-checkin-hint{
-  font-family:'Baloo 2',sans-serif;font-size:0.85rem;font-weight:700;color:var(--accent);
-  margin-left:6px;white-space:nowrap;
-}
-#agenda-checkin-detail:empty{display:none;}
-#agenda-checkin-detail{margin-top:18px;}
-#agenda-checkin-detail .tcheckin-panel{background:var(--paper);}
 .mbadge{display:inline-block;font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:700;color:#fff;padding:4px 12px;border-radius:6px;margin-left:8px;vertical-align:middle;background:var(--gold);}
 .mbadge.graded{background:var(--red);}
 .milestone-note{font-family:'Baloo 2',sans-serif;font-size:1.15rem;background:#fff;border-left:4px solid var(--gold);padding:14px 18px;border-radius:6px;margin-top:12px;color:#5c4a12;}
@@ -1276,11 +1263,6 @@ function rotationPillsHTML(rot){
   return pills;
 }
 
-// Rotations with a full Typing Check-In Key entry in the teacher Reference tab (Q1 only).
-const CHECKIN_KEY_ROTATIONS = [1, 4, 6, 8, 10, 12, 14, 16, 18, 20];
-function checkinKeyAvailable(rot){
-  return isTeacherMode() && activeQuarter === 1 && rot.tags.includes('checkin') && CHECKIN_KEY_ROTATIONS.includes(rot.r);
-}
 function rotationBodyHTML(rot){
   let body = `<div class="msection typing"><div class="mlabel">⌨️ Typing</div><div>${rot.typing}</div></div>`;
   if(rot.coding){
@@ -1296,34 +1278,10 @@ function rotationBodyHTML(rot){
   } else {
     body += `<div class="msection coding"><div class="mlabel">💻 Coding — CodeCombat</div><div>${rot.codingNote || 'Not started yet — coding blocks begin Rotation 3.'}</div></div>`;
   }
-  const showCheckinLink = checkinKeyAvailable(rot);
   body += `<div class="msection activities"><div class="mlabel">📋 Other Activities</div><ul>`;
-  rot.activities.forEach((a, i) => {
-    if(i === 0 && showCheckinLink){
-      body += `<li><button class="agenda-checkin-link" data-r="${rot.r}">${a} <span class="agenda-checkin-hint">▸ tap for full instructions</span></button></li>`;
-    } else {
-      body += `<li>${a}</li>`;
-    }
-  });
+  rot.activities.forEach(a => body += `<li>${a}</li>`);
   body += `</ul></div>`;
-  if(showCheckinLink) body += `<div id="agenda-checkin-detail"></div>`;
   return body;
-}
-function toggleAgendaCheckinDetail(rotNum){
-  const container = document.getElementById('agenda-checkin-detail');
-  if(!container) return;
-  if(container.dataset.open === String(rotNum)){
-    container.innerHTML = '';
-    container.dataset.open = '';
-    return;
-  }
-  const source = document.querySelector(`.tcheckin-detail[data-tcheckin="${rotNum}"]`);
-  if(!source){
-    container.innerHTML = `<div class="tcheckin-footnote">No detailed check-in key for this rotation yet.</div>`;
-    return;
-  }
-  container.innerHTML = `<div class="tcheckin-panel">${source.innerHTML}</div>`;
-  container.dataset.open = String(rotNum);
 }
 
 const overlayEl = document.getElementById('overlay');
@@ -1514,10 +1472,6 @@ function openSpecialModal(special){
   overlayEl.classList.add('show');
 }
 overlayEl.addEventListener('click', (e) => { if(e.target === overlayEl) closeModal(); });
-modalEl.addEventListener('click', (e) => {
-  const btn = e.target.closest('.agenda-checkin-link');
-  if(btn) toggleAgendaCheckinDetail(btn.dataset.r);
-});
 document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
 
 // --- Render one month at a time ---
