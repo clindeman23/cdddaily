@@ -1036,9 +1036,9 @@ const rotationsQ1 = [
   {r:5, dates:"Aug 26–28", summary:"Grade Sheets + TikTok script writing", goal:"12 WPM / 75% accuracy", typing:"Unlock Typing Jungle to lesson 80.",
    coding:{track:"cs1", level:"Lvl 8–11", due:"Aug 28", focus:"Strings, hero.say(), item targeting (Lvl 8–10); while loop intro (Lvl 11).", ff:"Lvl 12–13", milestone:"Lvls 8–11 done"},
    activities:[`${link(L.gradeSheet,"Grade Sheet Tracking Lesson 2")}`, `${link(L.tiktokAssign,"Work time: Planner TikTok script writing")}`, `${link(L.mcaCalendarGuide,"Add MCA Calendar to Computer Calendar")}`], tags:["goal"]},
-  {r:6, dates:"Aug 28–Sep 2", summary:"Typing Check-in #2, Grade Sheets", typing:"📊 Typing Check-in #2 (5 pts) — note improvement from #1. Continue lessons 50–80 — no new unlock.",
+  {r:6, dates:"Aug 28–Sep 2", summary:"Typing Check-in #2, Grade Sheets, Planner work time", typing:"📊 Typing Check-in #2 (5 pts) — note improvement from #1. Continue lessons 50–80 — no new unlock.",
    coding:{track:"cs1", level:"Lvl 12–15", due:"Sep 2", focus:"While loops (Lvl 11–13); while + conditions, findNearest() (Lvl 14–15).", ff:"Lvl 16–17", milestone:"Lvls 12–15 done"},
-   activities:["📊 Typing Check-in #2 (5 pts) — note improvement from #1", `${link(L.gradeSheet,"Grade Sheet Tracking Lesson 3")}`], tags:["checkin"]},
+   activities:["📊 Typing Check-in #2 (5 pts) — note improvement from #1", `${link(L.gradeSheet,"Grade Sheet Tracking Lesson 3")}`, "Work time: Planner organization (extended time)"], tags:["checkin"]},
   {r:7, dates:"Sep 2–4", summary:"Tinker Mentality, Grade Sheets", goal:"14 WPM / 75% accuracy", typing:"Unlock Typing Jungle to lesson 110.",
    coding:{track:"cs1", level:"Lvl 16–18", due:"Sep 4", focus:"More loop conditions (Lvl 16–17); if statements intro (Lvl 18).", ff:"Lvl 19–20", milestone:"Lvls 16–18 done"},
    activities:["Tinker Mentality intro (curiosity, failure, problem-solving)", `${link(L.gradeSheet,"Grade Sheet Tracking Lesson 4")}`], tags:["goal"]},
@@ -1334,7 +1334,7 @@ function openModal(r){
   overlayEl.classList.add('show');
   initTimer();
 }
-function closeModal(){ overlayEl.classList.remove('show'); stopTimer(); }
+function closeModal(){ overlayEl.classList.remove('show'); }
 
 // --- Built-in classroom timer, shown next to the rotation number when a modal is open ---
 let timerInterval = null;
@@ -1448,11 +1448,14 @@ function setCustomTimer(){
   renderTimerDisplay();
 }
 function initTimer(){
-  timerDuration = 300;
-  timerRemaining = 300;
-  timerRunning = false;
-  if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
+  // Timer state (timerDuration/timerRemaining/timerRunning) persists across modal
+  // open/close and rotation switches — only sync the freshly-rendered DOM to it.
   renderTimerDisplay();
+  const timerEl = document.getElementById('cd-timer');
+  if(timerEl) timerEl.classList.toggle('timer-done', !timerRunning && timerRemaining <= 0);
+  document.querySelectorAll('.timer-presets button').forEach(btn => {
+    btn.classList.toggle('active', parseInt(btn.dataset.mins, 10) * 60 === timerDuration);
+  });
   const toggleBtn = document.getElementById('timer-toggle');
   if(toggleBtn) toggleBtn.addEventListener('click', () => timerRunning ? stopTimer() : startTimer());
   const resetBtn = document.getElementById('timer-reset');
