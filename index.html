@@ -915,17 +915,20 @@ footer{
       <summary>⌨️ Typing Goals at a Glance — Q2</summary>
       <div class="tw-table">
       <table class="ref-table">
-        <tr><th>Rotations</th><th>Week</th><th>Typing Jungle Lessons</th><th>WPM Goal</th><th>Accuracy</th><th>Assessment</th></tr>
-        <tr><td>R1–2</td><td>1</td><td>150–165</td><td>TBD</td><td>TBD</td><td>Check-in #1 (5 pts)</td></tr>
-        <tr><td>R3–4</td><td>2–3</td><td>165–180</td><td>TBD</td><td>TBD</td><td>Check-in #2 (5 pts)</td></tr>
-        <tr><td>R5–6</td><td>4–5</td><td>180–195</td><td>TBD</td><td>TBD</td><td>Graded Test — Check-in 3</td></tr>
-        <tr><td>R7–8</td><td>6–7</td><td>195–210</td><td>TBD</td><td>TBD</td><td>Check-in #4 (5 pts)</td></tr>
-        <tr><td>R9–10</td><td>8–9</td><td>210–225</td><td>TBD</td><td>TBD</td><td>Check-in #5 (5 pts)</td></tr>
-        <tr><td>R11–12</td><td>10–11</td><td>225–240 (ceiling)</td><td>TBD</td><td>TBD</td><td>Check-in #6 (5 pts)</td></tr>
-        <tr><td>R13–14</td><td>12–13</td><td>240 (speed drills)</td><td>TBD</td><td>TBD</td><td>Check-in #7 (5 pts)</td></tr>
-        <tr><td>R15–16</td><td>14–15</td><td>240 (speed drills)</td><td>TBD</td><td>TBD</td><td>Graded Test — Check-in 4</td></tr>
-        <tr><td>R17–18</td><td>16–17</td><td>240 (speed drills)</td><td>TBD</td><td>TBD</td><td>Check-in #9 (5 pts)</td></tr>
-        <tr><td>R19–20</td><td>18</td><td>All lessons through 240</td><td>TBD</td><td>TBD</td><td>Q2 Final (graded)</td></tr>
+        <tr><th>Rotation</th><th>Typing Club</th><th>Assessment</th></tr>
+        <tr><td>R1</td><td>Typing Club opens up to 250</td><td>No check-in</td></tr>
+        <tr><td>R2</td><td>Open to 250</td><td>Check-in #1 (5 pts)</td></tr>
+        <tr><td>R4</td><td>Open to 250</td><td>Graded Test — Check-in 3</td></tr>
+        <tr><td>R5</td><td>Open to 250</td><td>Check-in #2 (5 pts)</td></tr>
+        <tr><td>R7</td><td>Open to 250</td><td>Check-in #3 (5 pts)</td></tr>
+        <tr><td>R8</td><td>Open to 250</td><td>Check-in #4 (5 pts)</td></tr>
+        <tr><td>R10</td><td>Open to 250</td><td>Check-in #5 (5 pts)</td></tr>
+        <tr><td>R12</td><td>Open to 250</td><td>Check-in #6 (5 pts)</td></tr>
+        <tr><td>R14</td><td>Open to 250</td><td>Graded Test — Check-in 4</td></tr>
+        <tr><td>R15</td><td>Open to 250</td><td>Check-in #7 (5 pts)</td></tr>
+        <tr><td>R17</td><td>Open to 250</td><td>Check-in #8 (5 pts)</td></tr>
+        <tr><td>R18</td><td>Open to 250</td><td>Q2 Final (graded)</td></tr>
+        <tr><td>R19</td><td>Open to 250</td><td>Final lesson count check</td></tr>
       </table>
       </div>
     </details>
@@ -1089,68 +1092,68 @@ const rotationsQ1 = [
   {r:20, dates:"Oct 6–7", summary:"Work/Print Day + Computer Parts review", typing:"📊 Typing Check-in #7 (completion check) — confirm all students reached lesson 150. Wrap-up / catch-up — lesson 150 required.",
    coding:{target:"GD1 Lvl 8", detail:"Q1 close. Students finish at GD1 Level 8."},
    activities:["📊 Typing Check-in #7 (completion check) — confirm all students reached lesson 150", `${link(L.workDayPrintDay,"Work Day + Print Day")}`, "Computer Parts review"], tags:["checkin"]},
-  {r:21, dates:"Oct 9–14", summary:"Mind Map wrap-up + Q2 Grade Sheet setup", goal:"WPM goal TBD", typing:"📊 Typing Check-in #1 (5 pts). Unlock Typing Jungle to lesson 165; remind students that 150 was the Q1 due point.",
-   coding:{target:"GD1 Lvl 9-10", detail:"Time-based spawning, game.time"},
-   activities:["📊 Typing Check-in #1 (5 pts) — 1-min test screenshot; note Q1 ending WPM as baseline", `${link(L.workDayPrintDay,"Continue Mind Map")} activity — many students still finishing; some may still need Cricut time`, "Students not yet Cricut-ed: help them set a time via email/IS", `Students who are finished: set up ${link(L.gradesheetQ2,"Q2 Grade Sheet")} pages (CDD, English, Religion)`], tags:["checkin","goal"]},
+  {r:21, dates:"Oct 5–6", summary:"Work Day", typing:"Work day — catch up on Typing Club lessons. No check-in today.",
+   coding:{target:"HOLD — Work Day", detail:"Catch-up day — no new levels. Finish anything you are behind on."},
+   activities:["Work Day — students catch up on anything unfinished (Typing Club, CodeCombat, Mind Map, Cricut projects)"], tags:[]},
 ];
 
 const rotationsQ2 = [
-  {r:1, dates:"Oct 15–16", summary:"Finish Mind Map", typing:"Continue lessons 150–165 — no new unlock.",
+  {r:1, dates:"Oct 6–13", summary:"Cricut Print Day + Typing Club opens to 250", typing:"Open Typing Club up to lesson 250. No check-in today.",
+   coding:{target:"GD1 Lvl 9-10", detail:"Time-based spawning, game.time"},
+   activities:[`${link(L.workDayPrintDay,"Cricut Print Day")} — print &amp; cut projects; finish Mind Map first if needed`, "Students not yet Cricut-ed: get them on the Cricuts first; everyone else works on Mind Map, typing, or CodeCombat while they wait", `Students who are finished: set up ${link(L.gradesheetQ2,"Q2 Grade Sheet")} pages (CDD, English, Religion) — share Canvas link as editor`, "Be patient — first time using all these tools; work with students as needed"], tags:[]},
+  {r:2, dates:"Oct 13–15", summary:"Cricut Print Day + Typing Check-in #1", goal:"WPM goal TBD", typing:"📊 Typing Check-in #1 (5 pts) — 1-min test screenshot; note Q1 ending WPM as baseline. Typing Club is open to 250.",
    coding:{target:"GD1 Lvl 11-12", detail:"Game UI: score display, timers"},
-   activities:[`${link(L.workDayPrintDay,"Finish Mind Map")} — should wrap up in most classes this rotation`, "Students done early: finalize Q2 Grade Sheet setup; share Canvas link as editor", "Be patient — first time using all these tools; work with students as needed"], tags:[]},
-  {r:2, dates:"Oct 16–20", summary:"Binary Notes + Tabula Rasa game due", goal:"WPM goal TBD", typing:"📊 Typing Check-in #2 (5 pts). Unlock Typing Jungle to lesson 180.",
+   activities:["📊 Typing Check-in #1 (5 pts) — 1-min test screenshot to Canvas", `${link(L.workDayPrintDay,"Cricut Print Day")} — second print day; print &amp; cut projects for anyone still waiting`], tags:["checkin","goal"]},
+  {r:3, dates:"Oct 20–22", summary:"Computer Parts Lab", typing:"Continue lessons — Typing Club is open to 250.",
    coding:{target:"GD1 Lvl 13", detail:"Branching events inside game loops"},
-   activities:["📊 Typing Check-in #2 (5 pts) — 1-min test screenshot to Canvas", `${link(L.binaryNotes,"Binary Notes")} — post on Canvas; students who are done or waiting work through this`], tags:["checkin","goal"]},
-  {r:3, dates:"Oct 20–22", summary:"Computer Parts Lab", typing:"Continue lessons 165–180 — no new unlock.",
-   coding:{target:"GD1 Lvl 14-15", detail:"Playable hero control"},
-   activities:[`${link(L.computerPartsLab,"Computer Parts Lab")} — students touch and take apart real desktop computers`, "Walk through the 8 main parts: CPU, Fan, Power Supply, Case, Ports, RAM, Motherboard, Hard Drive", "Note: some donated computers have no hard drive — pass one around", "Split periods: one class labs while the other types + Binary Notes; swap at 35 min"], tags:[]},
-  {r:4, dates:"Oct 22–23", summary:"Computer Parts Lab Practical + graded typing check-in", goal:"WPM goal TBD", typing:"Unlock Typing Jungle to lesson 195. 🏆 Typing Check-in 3 (GRADED) — goal TBD; deduct 10 pts for incorrect typing form.",
+   activities:[`${link(L.computerPartsLab,"Computer Parts Lab")} — students touch and take apart real desktop computers`, "Walk through the 8 main parts: CPU, Fan, Power Supply, Case, Ports, RAM, Motherboard, Hard Drive", "Note: some donated computers have no hard drive — pass one around", "Split periods: one class labs while the other types + Binary Notes; swap at 35 min", `${link(L.binaryNotes,"Binary Notes")} — post on Canvas; students who are done or waiting work through this`], tags:[]},
+  {r:4, dates:"Oct 22–23", summary:"Computer Parts Lab Practical + graded typing check-in", goal:"WPM goal TBD", typing:"Typing Club is open to 250. 🏆 Typing Check-in 3 (GRADED) — goal TBD; deduct 10 pts for incorrect typing form.",
    coding:null, codingNote:"No coding this rotation — full period used by the Computer Parts Lab Practical and typing check-in.",
    activities:[`${link(L.computerPartsLabPractical,"Computer Parts Lab Practical")} — small groups (max 8) complete the scavenger hunt in the lab room`, "Students complete summative questions back in the classroom", "Split periods: practical ↔ typing check-in, swap at 35 min"], tags:["goal","graded"]},
-  {r:5, dates:"Oct 24–27", summary:"Code.org Pixelation (Binary → RGB → Hex)", typing:"📊 Typing Check-in #3 (5 pts) — discuss accuracy vs. speed. Continue lessons 180–195 — no new unlock (Pixelation lesson day). Computer Parts Practical make-ups available during typing time.",
+  {r:5, dates:"Oct 24–27", summary:"Code.org Pixelation (Binary → RGB → Hex)", typing:"📊 Typing Check-in #2 (5 pts) — discuss accuracy vs. speed. Continue lessons — Typing Club is open to 250 (Pixelation lesson day). Computer Parts Practical make-ups available during typing time.",
    coding:{target:"Pixelation", detail:"Binary → RGB → Hex color unit (standalone lesson)"},
-   activities:["📊 Typing Check-in #3 (5 pts) — discuss accuracy vs. speed", "Code.org Pixelation Activity — students join your Code.org class (Canvas → Module 2 → + → External URL)", "Add the 'Pixelation' lesson via Course Catalog (Cmd+F to find it)", "Students work Binary → RGB; when done, toggle Hex to introduce hexadecimal"], tags:["checkin"]},
-  {r:6, dates:"Oct 27–29", summary:"Branding Lecture + Start-Up Challenge intro", goal:"WPM goal TBD", typing:"Unlock Typing Jungle to lesson 210.",
-   coding:{target:"GD1 Lvl 16-17", detail:"Complex layouts, randomized spawns. GD1 guided levels complete."},
+   activities:["📊 Typing Check-in #2 (5 pts) — discuss accuracy vs. speed", "Code.org Pixelation Activity — students join your Code.org class (Canvas → Module 2 → + → External URL)", "Add the 'Pixelation' lesson via Course Catalog (Cmd+F to find it)", "Students work Binary → RGB; when done, toggle Hex to introduce hexadecimal"], tags:["checkin"]},
+  {r:6, dates:"Oct 27–29", summary:"Branding Lecture + Start-Up Challenge intro", goal:"WPM goal TBD", typing:"Continue lessons — Typing Club is open to 250.",
+   coding:{target:"GD1 Lvl 14-15", detail:"Playable hero control"},
    activities:[`${link(L.brandingSlides,"Branding Lecture")} — discussion; goal is student buy-in for the Start-Up Challenge`, `${link(L.brandingVideo,"Watch the Branding video")} — preview beforehand so you can add commentary`, "Introduce Binary Homework (Kyle's binary quiz assignment) — assign on Canvas; work time for rest of class"], tags:["goal"]},
-  {r:7, dates:"Oct 29–31", summary:"Color Picker Scavenger Hunt + Binary Quiz", typing:"📊 Typing Check-in #4 (5 pts) — 1-min test screenshot to Canvas. Continue lessons 195–210 — no new unlock.",
+  {r:7, dates:"Oct 29–31", summary:"Color Picker Scavenger Hunt + Binary Quiz", typing:"📊 Typing Check-in #3 (5 pts) — 1-min test screenshot to Canvas. Continue lessons — Typing Club is open to 250.",
+   coding:{target:"GD1 Lvl 16-17", detail:"Complex layouts, randomized spawns. GD1 guided levels complete."},
+   activities:["📊 Typing Check-in #3 (5 pts) — 1-min test screenshot to Canvas", `${link(L.brandingSlides,"Finish Branding Slides")} if needed`, `${link(L.colorPickerHunt,"Color Picker Scavenger Hunt")} — guess brand colors, verify with eyedropper, complete reflection questions`, "Work on Binary Quiz (homework)"], tags:["checkin"]},
+  {r:8, dates:"Oct 31–Nov 1", summary:"Start-Up Challenge: Step 1 Brainstorm", goal:"WPM goal TBD", typing:"📊 Typing Check-in #4 (5 pts) — halfway through Q2! Keep going — Typing Club is open to 250.",
    coding:{target:"Tabula Rasa", detail:"Build your original game: terrain, spawns, win/lose condition"},
-   activities:["📊 Typing Check-in #4 (5 pts) — 1-min test screenshot to Canvas", `${link(L.brandingSlides,"Finish Branding Slides")} if needed`, `${link(L.colorPickerHunt,"Color Picker Scavenger Hunt")} — guess brand colors, verify with eyedropper, complete reflection questions`, "Work on Binary Quiz (homework)"], tags:["checkin"]},
-  {r:8, dates:"Oct 31–Nov 1", summary:"Start-Up Challenge: Step 1 Brainstorm", goal:"WPM goal TBD", typing:"📊 Typing Check-in #5 (5 pts) — halfway through Q2! Unlock Typing Jungle to lesson 225.",
+   activities:["📊 Typing Check-in #4 (5 pts) — halfway through Q2!", `${link(L.startupChallenge,"Introduce The Start-Up Challenge (DCE)")} — full overview + all steps`, "Make groups today", "Work time: Step 1 Brainstorm — think of a real-world problem to solve; fill out brainstorm worksheet"], tags:["checkin","goal"]},
+  {r:9, dates:"Nov 3–5", summary:"Step 1: interviews + submission", typing:"Continue lessons — Typing Club is open to 250.",
    coding:{target:"Tabula Rasa", detail:"Build continued + peer playtesting"},
-   activities:["📊 Typing Check-in #5 (5 pts) — halfway through Q2!", `${link(L.startupChallenge,"Introduce The Start-Up Challenge (DCE)")} — full overview + all steps`, "Make groups today", "Work time: Step 1 Brainstorm — think of a real-world problem to solve; fill out brainstorm worksheet"], tags:["checkin","goal"]},
-  {r:9, dates:"Nov 3–5", summary:"Step 1: interviews + submission", typing:"Continue lessons 210–225 — no new unlock.",
-   coding:{target:"Tabula Rasa GRADED", detail:"Polish + final submission. Game link to Canvas."},
    activities:[`${link(L.startupChallenge,"Step 1 continued")} — interview worksheet (3+ different people); record findings`, `${link(L.startupChallenge,"Step 1 submission")} — finalize brainstorm + interview findings, submit to Canvas`], tags:[]},
-  {r:10, dates:"Nov 5–7", summary:"Step 2: Initial Mock-Up", goal:"WPM goal TBD", typing:"📊 Typing Check-in #6 (5 pts). Unlock Typing Jungle to lesson 240 — Q2 lesson ceiling.",
+  {r:10, dates:"Nov 5–7", summary:"Step 2: Initial Mock-Up", goal:"WPM goal TBD", typing:"📊 Typing Check-in #5 (5 pts). Typing Club is open to 250.",
+   coding:{target:"Tabula Rasa GRADED", detail:"Polish + final submission. Game link to Canvas."},
+   activities:["📊 Typing Check-in #5 (5 pts) — 1-min test screenshot", `${link(L.startupChallenge,"Step 2")} — Initial Mock-Up: 1-page proposal (Why/What/How) + rough sketches`, "Remind students: visuals should match written explanation; rough drawings are fine"], tags:["checkin","goal"]},
+  {r:11, dates:"Nov 10–12", summary:"Step 2 due + Step 3: Design a Company", typing:"Continue lessons — Typing Club is open to 250.",
    coding:{target:"CS2 Lvl 1", detail:"Functions intro: why write named blocks of code?"},
-   activities:["📊 Typing Check-in #6 (5 pts) — 1-min test screenshot", `${link(L.startupChallenge,"Step 2")} — Initial Mock-Up: 1-page proposal (Why/What/How) + rough sketches`, "Remind students: visuals should match written explanation; rough drawings are fine"], tags:["checkin","goal"]},
-  {r:11, dates:"Nov 10–12", summary:"Step 2 due + Step 3: Design a Company", typing:"Continue lessons 225–240 — no new unlock.",
-   coding:{target:"CS2 Lvl 2-3", detail:"Defining and calling your own functions; scope and execution order"},
    activities:[`${link(L.startupChallenge,"Step 2 finalized")} — submit proposal + sketches to Canvas`, `${link(L.startupChallenge,"Step 3")} — Design a Company: name, motto/slogan, mission statement, color scheme (2–3 colors)`, "Discuss color psychology briefly: blue=trust, red=energy, green=nature, yellow=happiness"], tags:[]},
-  {r:12, dates:"Nov 12–14", summary:"Step 3 due + Step 4: Digital Brand Board", goal:"WPM goal TBD", typing:"📊 Typing Check-in #7 (5 pts) — discuss WPM growth from start of Q2. Speed drills at lesson 240.",
+  {r:12, dates:"Nov 12–14", summary:"Step 3 due + Step 4: Digital Brand Board", goal:"WPM goal TBD", typing:"📊 Typing Check-in #6 (5 pts) — discuss WPM growth from start of Q2. Continue lessons / speed drills — Typing Club is open to 250.",
+   coding:{target:"CS2 Lvl 2-3", detail:"Defining and calling your own functions; scope and execution order"},
+   activities:["📊 Typing Check-in #6 (5 pts) — discuss WPM growth from start of Q2", `${link(L.startupChallenge,"Step 3 finalized")} — submit company identity elements to Canvas`, `${link(L.startupChallenge,"Step 4")} — Digital Brand Board in Canva: name, motto, mission, 3 logo versions, fonts, HEX palette, promo item`, "All on one page — professional and creative; download as PDF"], tags:["checkin","goal"]},
+  {r:13, dates:"Nov 17–19", summary:"Step 4 work time + begin Step 5", typing:"Continue lessons / speed drills — Typing Club is open to 250.",
    coding:{target:"CS2 Lvl 4", detail:"Parameters: passing values into functions"},
-   activities:["📊 Typing Check-in #7 (5 pts) — discuss WPM growth from start of Q2", `${link(L.startupChallenge,"Step 3 finalized")} — submit company identity elements to Canvas`, `${link(L.startupChallenge,"Step 4")} — Digital Brand Board in Canva: name, motto, mission, 3 logo versions, fonts, HEX palette, promo item`, "All on one page — professional and creative; download as PDF"], tags:["checkin","goal"]},
-  {r:13, dates:"Nov 17–19", summary:"Step 4 work time + begin Step 5", typing:"Speed drills at lesson 240.",
-   coding:{target:"CS2 Lvl 5-6", detail:"Parameters continued; return values introduced"},
    activities:[`${link(L.startupChallenge,"Step 4 work time")} — complete Digital Brand Board; teacher circulates and gives feedback`, `${link(L.startupChallenge,"Step 4")} submitted to Canvas as PDF before moving on`, `${link(L.startupChallenge,"Begin Step 5")} — Presentation design: Google Slides or Canva deck for Shark Tank-style pitch`], tags:[]},
-  {r:14, dates:"Nov 19–21", summary:"Graded typing check-in + Brand Board planning", goal:"WPM goal TBD", typing:"Speed drills at lesson 240. 🏆 Typing Check-in 4 (GRADED) — goal TBD; still deduct 10 pts for incorrect form.",
-   coding:{target:"CS2 Lvl 7", detail:"Return values: functions that calculate and give back a result"},
+  {r:14, dates:"Nov 19–21", summary:"Graded typing check-in + Brand Board planning", goal:"WPM goal TBD", typing:"Continue lessons / speed drills — Typing Club is open to 250. 🏆 Typing Check-in 4 (GRADED) — goal TBD; still deduct 10 pts for incorrect form.",
+   coding:{target:"CS2 Lvl 5-6", detail:"Parameters continued; return values introduced"},
    activities:[`${link(L.startupChallenge,"Step 5 continued")} — Physical Brand Board planning: how will you physically display your brand?`, "Work time on both presentation and physical brand board"], tags:["goal","graded"]},
-  {r:15, dates:"Nov 21–25", summary:"Finalize presentation + Brand Board", typing:"📊 Typing Check-in #8 (5 pts) — almost done with Q2! Speed drills at lesson 240.",
+  {r:15, dates:"Nov 21–25", summary:"Finalize presentation + Brand Board", typing:"📊 Typing Check-in #7 (5 pts) — almost done with Q2! Continue lessons / speed drills — Typing Club is open to 250.",
+   coding:{target:"CS2 Lvl 7", detail:"Return values: functions that calculate and give back a result"},
+   activities:["📊 Typing Check-in #7 (5 pts) — almost done with Q2!", `${link(L.startupChallenge,"Step 5 work time")} — finalize presentation; practice PVLEGS delivery`, "Physical Brand Board work time — create, print, and assemble"], tags:["checkin","graded"]},
+  {r:16, dates:"Dec 1–3", summary:"Presentation rehearsal + Portfolio Day", goal:"WPM goal TBD", typing:"Continue lessons / speed drills — Typing Club is open to 250 (Portfolio Day — CodeCombat focus).",
    coding:{target:"CS2 Lvl 8", detail:"While loops + functions together"},
-   activities:["📊 Typing Check-in #8 (5 pts) — almost done with Q2!", `${link(L.startupChallenge,"Step 5 work time")} — finalize presentation; practice PVLEGS delivery`, "Physical Brand Board work time — create, print, and assemble"], tags:["checkin","graded"]},
-  {r:16, dates:"Dec 1–3", summary:"Presentation rehearsal + Portfolio Day", goal:"WPM goal TBD", typing:"Speed drills at lesson 240 (Portfolio Day — CodeCombat focus).",
-   coding:{target:"CS2 Lvl 9", detail:"Conditionals inside functions"},
    activities:["Presentation rehearsal day — groups practice full Shark Tank pitch using PVLEGS rubric", "Teacher gives verbal feedback; groups revise and polish", "Final Brand Board check — make sure all elements are complete and submitted"], tags:["goal","graded"]},
-  {r:17, dates:"Dec 3–5", summary:"Final polish + Showcase Day", typing:"📊 Typing Check-in #9 (5 pts) — final practice check before Q2 closes. Speed drills at lesson 240 (Showcase Day).",
-   coding:{target:"CS2 Lvl 10", detail:"Smarter reusable functions. Semester CodeCombat ends here."},
-   activities:["📊 Typing Check-in #9 (5 pts) — final practice check before Q2 closes", "Final work and polish day — everything for the Start-Up Challenge should be submitted or nearly done", "Presentation order determined — draw names or teacher-assigned"], tags:["checkin"]},
+  {r:17, dates:"Dec 3–5", summary:"Final polish + Showcase Day", typing:"📊 Typing Check-in #8 (5 pts) — final practice check before Q2 closes. Continue lessons / speed drills — Typing Club is open to 250 (Showcase Day).",
+   coding:{target:"CS2 Lvl 9", detail:"Conditionals inside functions"},
+   activities:["📊 Typing Check-in #8 (5 pts) — final practice check before Q2 closes", "Final work and polish day — everything for the Start-Up Challenge should be submitted or nearly done", "Presentation order determined — draw names or teacher-assigned"], tags:["checkin"]},
   {r:18, dates:"Dec 8–10", summary:"Graded Typing Final + Shark Tank presentations", goal:"WPM goal TBD", typing:"🏆 Q2 Typing Final (GRADED) — all lessons through lesson 240 required; this is the Q2 semester benchmark.",
    coding:null, codingNote:"No coding this rotation — full period used by the Q2 Typing Final and Start-Up Challenge presentations.",
    activities:["Start-Up Challenge Presentations — Shark Tank style; PVLEGS rubric active", "Groups present: product overview, mock-up, company identity, brand board, and pitch", "Audience students act as 'Sharks' — ask at least one question per group"], tags:["goal","graded"]},
   {r:19, dates:"Dec 10–12", summary:"Wrap-up + Q2 Grade Tracker update", typing:"📊 Final lesson count check — confirm all students maintained coding + typing progress. Wrap-up / catch-up — lesson 240 required.",
-   coding:{target:"Bridge to AI", detail:"What is AI? How it differs from the if/else logic you wrote. Q3 preview."},
+   coding:{target:"CS2 Lvl 10", detail:"Smarter reusable functions. Semester CodeCombat ends here. Bridge to AI moves to the start of Q3."},
    activities:["📊 Final lesson count check — confirm all students maintained coding + typing progress", "Continue Start-Up Challenge Presentations if needed", "Reflection: what did you learn about branding, computing, and working as a team?", `${link(L.gradesheetQ2,"Q2 Grade Tracker")} update — students update their grade sheet; submit final version`], tags:["checkin","graded"]},
 ];
 
